@@ -3,19 +3,16 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 
-const inter = localFont({
-  src: "../public/assets/fonts/inter/static/Inter_18pt-Bold.ttf",
+const serif = localFont({
+  src: "../public/assets/fonts/inter/Inter-Italic-VariableFont_opsz,wght.ttf",
 });
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
+const sanSerif = localFont({
+  src: "../public/assets/fonts/noto-serif/NotoSerif-VariableFont_wdth,wght.ttf",
+});
+const monospace = localFont({
+  src: "../public/assets/fonts/source-code-pro/SourceCodePro-VariableFont_wght.ttf",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -30,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} } antialiased`}
+        className={`${serif.className} bg-tetiary-white-space antialiased`}
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
