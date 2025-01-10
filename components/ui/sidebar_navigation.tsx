@@ -14,7 +14,7 @@ export default function Sidebar_Nav() {
       <>
         <nav className="mx-4 mt-4 hidden  lg:block">
           <div className="flex text-[14px] mb-4 bg-neutral-200 rounded-lg p-3 justify-between items-center">
-            <div className="inline-flex items-center">
+            <div className="inline-flex items-center ">
               {" "}
               <Image
                 src="/assets/images/icon-home.svg"
@@ -65,8 +65,8 @@ export default function Sidebar_Nav() {
       </>
 
       <>
-        <footer className="absolute bottom-0 border-t py-3 w-full justify-between px-10 flex lg:hidden">
-          <div className="flex flex-col justify-center items-center">
+        <footer className="absolute bottom-0 border-t py-3 w-full justify-between bg-white px-10 flex lg:hidden">
+          <div className="flex flex-col justify-center items-center bg-blue-50 px-[22px] rounded py-1">
             <Image
               src="/assets/images/icon-home.svg"
               width={24}

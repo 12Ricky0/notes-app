@@ -8,18 +8,12 @@ import Header from "@/components/ui/header";
 import Header_Control from "@/components/ui/header_control";
 import Note_Container from "@/components/ui/note_container";
 import Sidebar_Nav from "@/components/ui/sidebar_navigation";
+import Note_Form from "@/components/forms/note_form";
 
 export default function Home() {
   return (
     <main className="grid grid-rows-2">
-      <div className="row-span-2">
-        <Sidebar_Nav />
-      </div>
-      <div>
-        <Header />
-      </div>
-
-      {/* <Sidebar_Menu /> */}
+      <Note_Form />
       {/* <Header_Control />
       <Note_Container /> */}
     </main>
