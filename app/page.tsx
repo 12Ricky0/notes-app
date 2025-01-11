@@ -9,11 +9,16 @@ import Header_Control from "@/components/ui/header_control";
 import Note_Container from "@/components/ui/note_container";
 import Sidebar_Nav from "@/components/ui/sidebar_navigation";
 import Note_Form from "@/components/forms/note_form";
+import {
+  Color_Theme,
+  Settings_UI,
+  Font_Theme,
+} from "@/components/ui/settings_ui";
 
 export default function Home() {
   return (
     <main className="grid grid-rows-2">
-      <Note_Form />
+      <Font_Theme />
       {/* <Header_Control />
       <Note_Container /> */}
     </main>
