@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Header() {
   return (
-    <header className="bg-neutral-100 lg:bg-none py-[13px] dark:bg-black lg:border-b">
+    <header className=" lg:bg-none py-[13px] dark:bg-black lg:border-b">
       <Image
         src="/assets/images/logo.svg"
         width={24}
@@ -18,7 +18,7 @@ export default function Header() {
             <input
               type="search"
               placeholder="Search by title, content, or tags…"
-              className="py-[13px] rounded-lg w-[300px] pl-10 text-[14px] text-neutral-500 border"
+              className="py-[13px] rounded-lg w-[300px] pl-10 text-[14px] bg-transparent text-neutral-500 focus:outline-none border"
             />
             <Image
               src="/assets/images/icon-search.svg"

@@ -179,6 +179,7 @@ export function Font_Theme() {
             height={20}
             alt="left"
             className="mr-2"
+            // style={{ filter: "invert(100%)" }}
           />
 
           <span>Settings</span>

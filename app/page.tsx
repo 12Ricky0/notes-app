@@ -14,16 +14,20 @@ import {
   Settings_UI,
   Font_Theme,
 } from "@/components/ui/settings_ui";
+import { Right_Menu, Toast } from "@/components/ui/utilities";
 
 export default function Home() {
   return (
-    <main className="grid grid-rows-2">
-      <Font_Theme />
-      {/* <Header_Control />
-      <Note_Container /> */}
+    <main className="md:flex justify-between">
+      <div className="min-h-screen hidden md:inline-block">
+        <Sidebar_Nav />
+      </div>
+      <div className="md:w-full ">
+        <Header />
+        <div>
+          <Sidebar_Menu />
+        </div>
+      </div>
     </main>
-    // <main className="flex md:justify-center items-center h-screen">
-    //   <Delete />
-    // </main>
   );
 }
