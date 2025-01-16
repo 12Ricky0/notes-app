@@ -1,8 +1,9 @@
 import Image from "next/image";
+import data from "../../data.json";
 
 export default function Note_Container() {
   return (
-    <section>
+    <section className="">
       <article className="mx-4 border-b pb-3">
         <h1 className="font-bold text-[24px] text-black dark:text-white my-3">
           React Performance Optimization
@@ -53,7 +54,7 @@ export default function Note_Container() {
         <p>TODO: Benchmark current application and identify bottlenecks</p>
       </article>
 
-      <footer className="absolute bottom-0 ml-4 mb-[20px] hidden lg:block border-t pt-4 w-full">
+      <footer className="absolute bottom-0 mx-4 mb-[20px] hidden lg:block border-t pt-4 ">
         <button className="bg-primary-blue px-4 py-2 text-white font-medium text-[14px] rounded-lg mr-4">
           Save Note
         </button>

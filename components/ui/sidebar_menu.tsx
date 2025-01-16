@@ -23,7 +23,7 @@ export default function Sidebar_Menu() {
   }
   return (
     <section className="md:w-[290px] border-r dark:bg-black h-screen">
-      <div className="md:pl-8 md:mr-4 mx-4 md:mx-0 pt-[20px] ">
+      <div className="md:pl-8 md:mr-4 mx-4 md:mx-0 md:pt-[20px]">
         <Link
           className="bg-primary-blue hidden md:block text-white py-3 rounded-lg font-medium text-[14px] px-[58px]"
           href=""
@@ -31,11 +31,8 @@ export default function Sidebar_Menu() {
           + Create New Note
         </Link>
         {data.notes.map((note, index) => (
-          <>
-            <article
-              key={index}
-              className=" mt-4 flex flex-col gap-3 border-b pb-3"
-            >
+          <div key={index}>
+            <article className=" mt-4 flex flex-col gap-3 border-b pb-3">
               <h1 className="font-semibold text-[16px] dark:text-white text-primary-dark">
                 {note.title}
               </h1>
@@ -53,7 +50,7 @@ export default function Sidebar_Menu() {
                 {date(note.lastEdited.split("T")[0])}
               </p>
             </article>
-          </>
+          </div>
         ))}
       </div>
     </section>

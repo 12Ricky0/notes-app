@@ -24,8 +24,9 @@ export default function Home() {
       </div>
       <div className="md:w-full ">
         <Header />
-        <div>
+        <div className="flex">
           <Sidebar_Menu />
+          <Note_Container />
         </div>
       </div>
     </main>
