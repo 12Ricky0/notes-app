@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
+import NotesProvider from "@/context";
 
 const serif = localFont({
   src: "../public/assets/fonts/inter/Inter-Italic-VariableFont_opsz,wght.ttf",
@@ -27,10 +29,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${serif.className} bg-tetiary-white-space antialiased`}
+        className={`${serif.className} bg-white antialiased`}
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <NotesProvider>{children}</NotesProvider>
       </body>
     </html>
   );

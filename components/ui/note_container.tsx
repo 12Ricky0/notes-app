@@ -1,12 +1,53 @@
+"use client";
+
 import Image from "next/image";
 import data from "../../data.json";
+import { useContext } from "react";
+import { NotesContext } from "@/context";
+import { Notes } from "@/libs/definitions";
 
 export default function Note_Container() {
+  const { title } = useContext(NotesContext);
+  const note = data.notes.find((note) => note.title == title);
+
+  function date(date: string) {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const d = new Date(date);
+    return d.getDate() + " " + months[d.getUTCMonth()] + " " + d.getFullYear();
+  }
+
+  function formatContent() {
+    const sections = note?.content.trim().split(/\n\n+/);
+
+    const parsedContent = sections?.map((section) => {
+      const [title, ...details] = section.split(/\n/);
+      return {
+        title: title.trim(),
+        details: details.map((detail) => detail.trim()).filter(Boolean),
+      };
+    });
+
+    return parsedContent;
+  }
+
   return (
-    <section className="">
+    <section className="lg:w-[60%] hidden lg:block">
       <article className="mx-4 border-b pb-3">
         <h1 className="font-bold text-[24px] text-black dark:text-white my-3">
-          React Performance Optimization
+          {note?.title}
         </h1>
         <div className="flex gap-7 ">
           <div>
@@ -32,29 +73,32 @@ export default function Note_Container() {
             </div>
           </div>
           <div className="text-[12px] text-neutral-700">
-            <p className="mb-1">Dev, React</p>
-            <p>29 Oct 2024</p>
+            <p className="mb-1">{note?.tags + " "}</p>
+            <p>{date(note!.lastEdited.split("T")[0])}</p>
           </div>
         </div>
       </article>
+      {formatContent()?.map((content) => (
+        <article
+          key={content.title}
+          className="text-neutral-800 mt-3 text-[14px] mx-4"
+        >
+          {/* <h3>{content.title}</h3> */}
 
-      <article className="text-neutral-800 mt-3 text-[14px] mx-4">
-        <h3>Key performance optimization techniques:</h3>
+          <ol className=" my-4">
+            <li>
+              {content.title}
+              <ul className="">
+                <li>{content.details.map((co) => co)}</li>
+                {/* <li>Implement dynamic imports for heavy components</li> */}
+              </ul>
+            </li>
+          </ol>
 
-        <ol className="list-decimal list-inside my-4">
-          <li>
-            Code Splitting
-            <ul className="list-inside list-[square]">
-              <li>Use React.lazy() for route-based splitting</li>
-              <li>Implement dynamic imports for heavy components</li>
-            </ul>
-          </li>
-        </ol>
-
-        <p>TODO: Benchmark current application and identify bottlenecks</p>
-      </article>
-
-      <footer className="absolute bottom-0 mx-4 mb-[20px] hidden lg:block border-t pt-4 ">
+          {/* <p>TODO: Benchmark current application and identify bottlenecks</p> */}
+        </article>
+      ))}
+      <footer className="border-t absolute bottom-0  mx-4 mb-[20px] hidden lg:block  pt-4 ">
         <button className="bg-primary-blue px-4 py-2 text-white font-medium text-[14px] rounded-lg mr-4">
           Save Note
         </button>

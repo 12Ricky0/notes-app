@@ -45,7 +45,7 @@ export function Toast({ title, link }: { title: string; link?: string }) {
 
 export function Right_Menu() {
   return (
-    <div className="w-[290px] mt-[20px] pl-4 border-l h-screen hidden lg:block mr-8">
+    <div className="w-[290p] mt-[20px] pl-4 border-l h-screen hidden lg:block mr-8">
       <div className="py-3 px-2 rounded-lg border w-[242px] mb-3">
         <div className="flex items-center gap-2">
           <svg

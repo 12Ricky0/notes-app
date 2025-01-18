@@ -1,42 +1,30 @@
 "use client";
 
-import { createContext, useState, useEffect } from "react";
-export const NotesContext = createContext({});
+import React, {
+  createContext,
+  useState,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
-export default function NotesProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [darkMode, setDarkMode] = useState(false);
+// Define the type of your context
+type NotesContextType = {
+  title: string;
+  setTitle: Dispatch<SetStateAction<string>>;
+};
 
-  //   useEffect(() => {
+// Create the context with an initial value of `undefined`
+export const NotesContext = createContext<NotesContextType>(
+  {} as NotesContextType
+);
 
-  //     if (localStorage.getItem("theme") === "dark") {
-  //       setDarkMode(true);
-  //     }
-  //   }, []);
+// Create the provider component
+export default function NotesProvider({ children }: { children: ReactNode }) {
+  const [title, setTitle] = useState<string>("React Performance Optimization");
 
-  //   useEffect(() => {
-  //     if (
-  //       darkMode ||
-  //       (!("theme" in localStorage) &&
-  //         window.matchMedia("(prefers-color-scheme: dark)").matches)
-  //     ) {
-  //       document.documentElement.classList.add("dark");
-  //       localStorage.setItem("theme", "dark");
-  //     } else {
-  //       document.documentElement.classList.remove("dark");
-  //       localStorage.setItem("theme", "light");
-  //     }
-  //   }, [darkMode]);
   return (
-    <NotesContext.Provider
-      value={{
-        darkMode,
-        setDarkMode,
-      }}
-    >
+    <NotesContext.Provider value={{ title, setTitle }}>
       {children}
     </NotesContext.Provider>
   );
