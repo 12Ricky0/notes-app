@@ -3,7 +3,7 @@ import Header from "@/components/ui/header";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className="md:flex justify-between ">
-      <div className="min-h-screen hidden md:inline-block">
+      <div className="">
         <Sidebar_Nav />
       </div>
       <div className="md:w-full ">

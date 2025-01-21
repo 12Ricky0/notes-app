@@ -4,8 +4,8 @@ import Link from "next/link";
 export default function Header_Control() {
   return (
     <section className="lg:hidden">
-      <div className="mx-4 flex justify-between items-center border-b py-3 ">
-        <Link className="flex " href="">
+      <div className="mx-4 md:mx-8 flex justify-between items-center border-b py-3 ">
+        <Link className="flex " href="/dashboard/notes">
           <Image
             src="/assets/images/icon-arrow-left.svg"
             width={18}

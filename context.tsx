@@ -12,6 +12,8 @@ import React, {
 type NotesContextType = {
   title: string;
   setTitle: Dispatch<SetStateAction<string>>;
+  tag: string;
+  setTag: Dispatch<SetStateAction<string>>;
 };
 
 // Create the context with an initial value of `undefined`
@@ -22,9 +24,10 @@ export const NotesContext = createContext<NotesContextType>(
 // Create the provider component
 export default function NotesProvider({ children }: { children: ReactNode }) {
   const [title, setTitle] = useState<string>("React Performance Optimization");
+  const [tag, setTag] = useState<string>("Dev");
 
   return (
-    <NotesContext.Provider value={{ title, setTitle }}>
+    <NotesContext.Provider value={{ title, setTitle, tag, setTag }}>
       {children}
     </NotesContext.Provider>
   );

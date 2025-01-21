@@ -8,7 +8,7 @@ export default function Header() {
         width={24}
         height={24}
         alt="logo"
-        className="w-auto h-auto mx-4 md:mx-8 lg:hidden"
+        className="w-auto h-auto mx-4 md:mx-8 pt-[23p] lg:hidden"
       />
       <div className="lg:flex justify-between items-center mx-8 hidden ">
         <h1 className="font-bold text-black text-[24px]">All Notes</h1>

@@ -4,11 +4,13 @@ import Image from "next/image";
 import data from "../../data.json";
 import { useContext } from "react";
 import { NotesContext } from "@/context";
+import { usePathname } from "next/navigation";
 import { Notes } from "@/libs/definitions";
 
 export default function Note_Container() {
   const { title } = useContext(NotesContext);
   const note = data.notes.find((note) => note.title == title);
+  const pathname = usePathname();
 
   function date(date: string) {
     const months = [
@@ -44,8 +46,12 @@ export default function Note_Container() {
   }
 
   return (
-    <section className="lg:w-[60%] hidden lg:block">
-      <article className="mx-4 border-b pb-3">
+    <section
+      className={`lg:w-[60%]  ${
+        pathname == "/dashboard/notes/details" ? "block" : "hidden lg:block"
+      }`}
+    >
+      <article className="mx-4 md:mx-8 lg:mx-4 border-b pb-3">
         <h1 className="font-bold text-[24px] text-black dark:text-white my-3">
           {note?.title}
         </h1>
@@ -81,7 +87,7 @@ export default function Note_Container() {
       {formatContent()?.map((content) => (
         <article
           key={content.title}
-          className="text-neutral-800 mt-3 text-[14px] mx-4"
+          className="text-neutral-800 mt-3 text-[14px] mx-4 md:mx-8 lg:mx-4"
         >
           {/* <h3>{content.title}</h3> */}
 
