@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
       <div className="md:w-full ">
         <Header />
-        <div className="md:flex">{children} </div>
+        <div className="lg:flex">{children} </div>
       </div>
     </main>
   );
