@@ -47,7 +47,7 @@ export default function Note_Container() {
 
   return (
     <section
-      className={`lg:w-[60%]  ${
+      className={`lg:w-[60%] lg:h-screen overflow-scroll  ${
         pathname == "/dashboard/notes/details" ? "block" : "hidden lg:block"
       }`}
     >

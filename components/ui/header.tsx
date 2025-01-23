@@ -1,8 +1,13 @@
+"use client";
 import Image from "next/image";
+import { useContext } from "react";
+import { NotesContext } from "@/context";
 
 export default function Header() {
+  const { tag } = useContext(NotesContext);
+
   return (
-    <header className=" lg:bg-none py-[13px] dark:bg-black lg:border-b">
+    <header className=" lg:bg-none py-[13px] dark:bg-black lg:border-b static">
       <Image
         src="/assets/images/logo.svg"
         width={24}
@@ -11,7 +16,21 @@ export default function Header() {
         className="w-auto h-auto mx-4 md:mx-8 pt-[23p] lg:hidden"
       />
       <div className="lg:flex justify-between items-center mx-8 hidden ">
-        <h1 className="font-bold text-black text-[24px]">All Notes</h1>
+        <h1
+          className={`font-bold text-black text-[24px] ${
+            tag == "" ? "hidden" : "block"
+          }`}
+        >
+          {tag == "Archieved" ? "" : "Notes Tagged:"}
+          {tag}
+        </h1>
+        <h1
+          className={`font-bold text-black text-[24px] ${
+            tag == "" ? "block" : "hidden"
+          }`}
+        >
+          All Notes
+        </h1>
 
         <div className="flex gap-4">
           <div className="relative">

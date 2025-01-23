@@ -27,16 +27,16 @@ export default function Sidebar_Menu() {
 
   const { title, setTitle, tag } = useContext(NotesContext);
 
-  let notes;
+  let notes = data.notes;
 
-  if (tag) {
+  if (tag == "Archieved") {
+    notes = data.notes.filter((note) => note.isArchived === true);
+  } else if (tag) {
     notes = data.notes.filter((note) => note.tags.includes(tag));
-  } else {
-    notes = data.notes;
   }
 
   return (
-    <section className="lg:w-[290px] md:w-full lg:border-r dark:bg-black h-screen ">
+    <section className="lg:w-[290px] md:w-full lg:border-r dark:bg-black h-screen overflow-scroll ">
       <div className="lg:pl-8 lg:mr-4 mx-4 md:mx-8 lg:mx-0 md:pt-[20px] lg:last:pb-0 pb-[100px]">
         <Link
           className="bg-primary-blue hidden lg:flex text-white py-3 rounded-lg font-medium text-[14px] justify-center"
@@ -44,6 +44,30 @@ export default function Sidebar_Menu() {
         >
           + Create New Note
         </Link>
+        <h1
+          className={`font-bold text-black text-[24px] mt-[20px] mb-2 lg:hidden ${
+            tag == "" ? "hidden" : "block"
+          }`}
+        >
+          {tag == "Archieved" ? "" : "Notes Tagged:"}
+          {tag}
+        </h1>
+        <h1
+          className={`font-bold text-black text-[24px] mt-[20px] mb-2 lg:hidden ${
+            tag == "" ? "block" : "hidden"
+          }`}
+        >
+          All Notes
+        </h1>
+
+        <p
+          className={`text-neutral-700 font-normal text-[14px] my-4 ${
+            tag == "Archieved" ? "block" : "hidden"
+          }`}
+        >
+          All your archived notes are stored here. You can restore or delete
+          them anytime.
+        </p>
         {notes?.map((note, index) => (
           <div onClick={() => setTitle(note.title)} key={index}>
             <article

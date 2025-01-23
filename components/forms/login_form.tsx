@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Login_form() {
   const [showPassword, setShowPassword] = useState(false);
@@ -95,10 +96,13 @@ export default function Login_form() {
         <span className="text-[14px] mt-6 font-normal mb-6 text-tetiary-semi-dark dark:text-secondary-light-gray">
           No account yet?
         </span>
-        <span className="cursor-pointer text-tetiary-semi-dark font-medium dark:text-secondary-light-gray text-[14px] hover:text-primary-blue">
+        <Link
+          href="/register"
+          className="cursor-pointer text-tetiary-semi-dark font-medium dark:text-secondary-light-gray text-[14px] hover:text-primary-blue"
+        >
           {" "}
           Sign Up
-        </span>
+        </Link>
       </div>
     </section>
   );

@@ -3,6 +3,8 @@ import Image from "next/image";
 import data from "../../data.json";
 import { useContext } from "react";
 import { NotesContext } from "../../context";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Sidebar_Nav() {
   // Use a Set to store unique tags
@@ -19,9 +21,10 @@ export default function Sidebar_Nav() {
   const tagsArray = Array.from(uniqueTags).sort();
 
   const { tag, setTag, setMenu, menu } = useContext(NotesContext);
+  const router = useRouter();
 
   return (
-    <section className="lg:border-r lg:h-screen lg:w-[272px]">
+    <section className="lg:border-r lg:h-screen overflow-scroll lg:w-[272px]">
       <Image
         src="/assets/images/logo.svg"
         width={24}
@@ -59,17 +62,32 @@ export default function Sidebar_Nav() {
               } h-auto right-2`}
             />
           </div>
-          <div className="flex text-[14px] p-3 cursor-pointer items-center">
+          <div
+            onClick={() => setTag("Archieved")}
+            className={`flex justify-between cursor-pointer p-3 items-center ${
+              tag == "Archieved" && "bg-neutral-200 rounded-lg "
+            }`}
+          >
+            <div className={`flex text-[14px]  `}>
+              <Image
+                src="/assets/images/icon-archive.svg"
+                width={24}
+                height={24}
+                alt="archieve"
+                className="w-auto  mr-2 h-auto"
+              />
+              <span>Archived Notes</span>
+            </div>
             <Image
-              src="/assets/images/icon-archive.svg"
+              src="/assets/images/icon-chevron-right.svg"
               width={24}
               height={24}
-              alt="archieve"
-              className="w-auto  mr-2 h-auto"
+              alt="arrow-right"
+              className={`w-auto ${
+                tag == "Archieved" ? "block" : "hidden"
+              } h-auto right-2`}
             />
-            <span>Archived Notes</span>
           </div>
-
           <div className="border-t mt-2">
             <h1 className="mt-2 ml-3 mb-6 font-medium text-neutral-500 text-[14px]">
               Tags
@@ -132,7 +150,11 @@ export default function Sidebar_Nav() {
       <>
         <footer className=" bottom-0 border-t py-3 w-full justify-between bg-white md:px-8 px-4 fixed flex lg:hidden">
           <div
-            onClick={() => setMenu("Home")}
+            onClick={() => {
+              setMenu("Home");
+              setTag("");
+              router.push("/dashboard/notes");
+            }}
             className={`flex flex-col justify-center items-center ${
               menu == "Home" && "bg-blue-50 rounded"
             }  px-[22px]  py-1`}
@@ -166,7 +188,11 @@ export default function Sidebar_Nav() {
             </span>
           </div>
           <div
-            onClick={() => setMenu("Archieved")}
+            onClick={() => {
+              setMenu("Archieved");
+              setTag("Archieved");
+              router.push("/dashboard/notes");
+            }}
             className={`flex flex-col justify-center px-[22px] items-center ${
               menu == "Archieved" && "bg-blue-50 rounded"
             }`}
@@ -188,16 +214,18 @@ export default function Sidebar_Nav() {
               menu == "Tag" && "bg-blue-50 rounded"
             }`}
           >
-            <Image
-              src="/assets/images/icon-tag.svg"
-              width={24}
-              height={24}
-              alt="tag"
-              className="w-auto h-auto "
-            />
-            <span className="hidden md:block text-[12px] text-tetiary-semi-dark">
-              Tag
-            </span>
+            <Link href="/dashboard/menu">
+              <Image
+                src="/assets/images/icon-tag.svg"
+                width={24}
+                height={24}
+                alt="tag"
+                className="w-auto h-auto "
+              />
+              <span className="hidden md:block text-[12px] text-tetiary-semi-dark">
+                Tag
+              </span>
+            </Link>
           </div>
           <div
             onClick={() => setMenu("Settings")}
