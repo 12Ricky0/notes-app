@@ -51,7 +51,7 @@ export default function Note_Container() {
         pathname == "/dashboard/notes/details" ? "block" : "hidden lg:block"
       }`}
     >
-      <article className="mx-4 md:mx-8 lg:mx-4 border-b pb-3">
+      <article className="mx-4 md:mx-8 lg:mx-6 border-b pb-3">
         <h1 className="font-bold text-[24px] text-black dark:text-white my-3">
           {note?.title}
         </h1>
@@ -87,24 +87,19 @@ export default function Note_Container() {
       {formatContent()?.map((content) => (
         <article
           key={content.title}
-          className="text-neutral-800 mt-3 text-[14px] mx-4 md:mx-8 lg:mx-4"
+          className="text-neutral-800 mt-3 text-[14px] mx-4 md:mx-8 lg:mx-6"
         >
-          {/* <h3>{content.title}</h3> */}
-
           <ol className=" my-4">
             <li>
               {content.title}
               <ul className="">
                 <li>{content.details.map((co) => co)}</li>
-                {/* <li>Implement dynamic imports for heavy components</li> */}
               </ul>
             </li>
           </ol>
-
-          {/* <p>TODO: Benchmark current application and identify bottlenecks</p> */}
         </article>
       ))}
-      <footer className="border-t absolute bottom-0  mx-4 mb-[20px] hidden lg:block  pt-4 ">
+      <footer className="   border-t mx-6 mb-[20px] hidden lg:block  pt-4 ">
         <button className="bg-primary-blue px-4 py-2 text-white font-medium text-[14px] rounded-lg mr-4">
           Save Note
         </button>

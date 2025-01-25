@@ -233,16 +233,18 @@ export default function Sidebar_Nav() {
               menu == "Settings" && "bg-blue-50 rounded"
             }`}
           >
-            <Image
-              src="/assets/images/icon-settings.svg"
-              width={24}
-              height={24}
-              alt="settings"
-              className="w-auto h-auto "
-            />
-            <span className="hidden md:block text-[12px] text-tetiary-semi-dark">
-              Settings
-            </span>
+            <Link href="/dashboard/settings">
+              <Image
+                src="/assets/images/icon-settings.svg"
+                width={24}
+                height={24}
+                alt="settings"
+                className="w-auto h-auto "
+              />
+              <span className="hidden md:block text-[12px] text-tetiary-semi-dark">
+                Settings
+              </span>
+            </Link>
           </div>
         </footer>
       </>

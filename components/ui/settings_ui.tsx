@@ -1,22 +1,51 @@
+"use client";
 import Image from "next/image";
+import { useContext } from "react";
+import { NotesContext } from "../../context";
 
 export function Settings_UI() {
+  const { settings, setSettings } = useContext(NotesContext);
+
   return (
-    <section className="mx-4">
-      <h1 className="font-bold text-[24px] text-black dark:text-white mt-6 mb-4">
+    <section className="md:ml-8 mx-4  h-screen overflow-scroll lg:border-r pr-4">
+      <h1 className="font-bold text-[24px] text-black dark:text-white mb-4 lg:hidden">
         Settings
       </h1>
-      <div className="flex flex-col gap-4 border-b pb-4">
-        <div className="flex gap-2 font-medium text-sm text-neutral-950">
+      <div className="flex flex-col  border-b pb-4 lg:mt-[20px] lg:w-[258px] cursor-pointer">
+        <div
+          onClick={() => setSettings("Color Theme")}
+          className={`flex justify-between items-center py-[10px] ${
+            settings == "Color Theme" && "bg-neutral-100"
+          }   rounded-md`}
+        >
+          <div
+            className="flex gap-2
+         px-2 font-medium text-sm text-neutral-950"
+          >
+            <Image
+              src="/assets/images/icon-sun.svg"
+              width={20}
+              height={20}
+              alt="sun"
+            />
+            <span>Color Theme</span>
+          </div>
           <Image
-            src="/assets/images/icon-sun.svg"
-            width={20}
-            height={20}
-            alt="sun"
+            src="/assets/images/icon-arrow-left.svg"
+            width={15}
+            height={15}
+            alt="right"
+            className={`rotate-180 mr-[9px] ${
+              settings == "Color Theme" ? "block" : "hidden"
+            }`}
           />
-          <span>Color Theme</span>
         </div>
-        <div className="flex justify-between">
+        <div
+          onClick={() => setSettings("Font Theme")}
+          className={`flex py-[10px] px-2 ${
+            settings == "Font Theme" && "bg-neutral-100"
+          }  rounded-md justify-between`}
+        >
           <div className="flex gap-2 font-medium text-sm text-neutral-950">
             <Image
               src="/assets/images/icon-font.svg"
@@ -32,21 +61,39 @@ export function Settings_UI() {
             width={15}
             height={15}
             alt="right"
-            className="rotate-180 hidden md:block"
+            className={`rotate-180 mr-[9x] ${
+              settings == "Font Theme" ? "block" : "hidden"
+            }`}
           />
         </div>
-        <div className="flex gap-2 font-medium text-sm text-neutral-950">
+        <div
+          onClick={() => setSettings("Change Password")}
+          className={`flex py-[10px] px-2 ${
+            settings == "Change Password" && "bg-neutral-100"
+          }  rounded-md justify-between`}
+        >
+          <div className="flex gap-2 font-medium text-sm text-neutral-950">
+            <Image
+              src="/assets/images/icon-lock.svg"
+              width={20}
+              height={20}
+              alt="lock"
+            />
+            <span>Change Password</span>
+          </div>
           <Image
-            src="/assets/images/icon-lock.svg"
-            width={20}
-            height={20}
-            alt="lock"
+            src="/assets/images/icon-arrow-left.svg"
+            width={15}
+            height={15}
+            alt="right"
+            className={`rotate-180 mr-[9x] ${
+              settings == "Change Password" ? "block" : "hidden"
+            }`}
           />
-          <span>Change Password</span>
         </div>
       </div>
 
-      <div className="flex gap-2 pt-4 font-medium text-sm text-neutral-950">
+      <div className="flex gap-2 pt-4 px-2 font-medium text-sm text-neutral-950">
         <Image
           src="/assets/images/icon-logout.svg"
           width={20}
@@ -60,9 +107,15 @@ export function Settings_UI() {
 }
 
 export function Color_Theme() {
+  const { settings } = useContext(NotesContext);
+
   return (
     <>
-      <div className="mx-4 mt-[25px]">
+      <div
+        className={`${
+          settings == "Color Theme" ? "block" : "hidden"
+        }mx-4 mt-[25px] w-[50%] `}
+      >
         <div className="font-medium text-sm text-neutral-600 flex">
           <Image
             src="/assets/images/icon-arrow-left.svg"
@@ -169,9 +222,15 @@ export function Color_Theme() {
 }
 
 export function Font_Theme() {
+  const { settings, setSettings } = useContext(NotesContext);
+
   return (
     <>
-      <div className="mx-4 mt-[25px]">
+      <div
+        className={`mx-4 mt-[25px] ${
+          settings == "Font Theme" ? "block" : "hidden"
+        }`}
+      >
         <div className="font-medium text-sm text-neutral-600 flex">
           <Image
             src="/assets/images/icon-arrow-left.svg"
