@@ -4,6 +4,7 @@ import data from "../../data.json";
 import { useContext } from "react";
 import { NotesContext } from "../../context";
 import Image from "next/image";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 export default function Sidebar_Menu() {
   function date(date: string) {
@@ -25,14 +26,39 @@ export default function Sidebar_Menu() {
     return d.getDate() + " " + months[d.getUTCMonth()] + " " + d.getFullYear();
   }
 
-  const { title, setTitle, tag } = useContext(NotesContext);
+  const { title, setTitle, tag, menu } = useContext(NotesContext);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchInput = searchParams.get("query")?.toString();
 
   let notes = data.notes;
 
-  if (tag == "Archieved") {
-    notes = data.notes.filter((note) => note.isArchived === true);
-  } else if (tag) {
-    notes = data.notes.filter((note) => note.tags.includes(tag));
+  function handleSearch(term: string) {
+    const params = new URLSearchParams(searchParams);
+
+    if (term) {
+      params.set("query", term);
+    } else {
+      params.delete("query");
+    }
+    router.replace(`${pathname}?${params.toString()}`);
+  }
+
+  if (tag === "Archieved") {
+    notes = notes.filter((note) => note.isArchived === true);
+  }
+
+  if (tag && tag !== "Archieved") {
+    notes = notes.filter((note) => note.tags.includes(tag));
+  }
+
+  if (searchInput) {
+    notes = notes.filter((note) =>
+      note.tags.some((tag) =>
+        tag.toLowerCase().includes(searchInput.toLowerCase())
+      )
+    );
   }
 
   return (
@@ -59,15 +85,44 @@ export default function Sidebar_Menu() {
         >
           All Notes
         </h1>
-
-        <p
-          className={`text-neutral-700 font-normal text-[14px] my-4 ${
-            tag == "Archieved" ? "block" : "hidden"
+        {/* <h1
+          className={`font-bold text-black text-[24px] mt-[20px] mb-2 lg:hidden ${
+            menu == "Search" ? "block" : "hidden"
           }`}
         >
-          All your archived notes are stored here. You can restore or delete
-          them anytime.
-        </p>
+          Search
+        </h1> */}
+        {menu == "Search" && (
+          <div className="relative lg:hidden">
+            <input
+              type="search"
+              onChange={(e) => handleSearch(e.target.value)}
+              placeholder="Search by title, content, or tags…"
+              className="py-[13px] rounded-lg w-full pl-10 text-[14px] bg-transparent text-neutral-500 focus:outline-none border"
+              defaultValue={searchInput}
+            />
+            <Image
+              src="/assets/images/icon-search.svg"
+              width={20}
+              height={20}
+              alt="settings"
+              className=" absolute top-[14px] left-4"
+            />
+          </div>
+        )}
+        {tag == "Archieved" && (
+          <p className={`text-neutral-700 font-normal text-[14px] my-4 `}>
+            All your archived notes are stored here. You can restore or delete
+            them anytime.
+          </p>
+        )}{" "}
+        {menu == "Search" && searchInput && (
+          <p
+            className={`text-neutral-700 font-normal text-[14px] my-4 lg:hidden`}
+          >
+            All notes matching `{searchInput}` are displayed below.{" "}
+          </p>
+        )}{" "}
         {notes?.map((note, index) => (
           <div onClick={() => setTitle(note.title)} key={index}>
             <article

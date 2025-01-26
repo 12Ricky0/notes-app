@@ -5,7 +5,6 @@ import data from "../../data.json";
 import { useContext } from "react";
 import { NotesContext } from "@/context";
 import { usePathname } from "next/navigation";
-import { Notes } from "@/libs/definitions";
 
 export default function Note_Container() {
   const { title } = useContext(NotesContext);

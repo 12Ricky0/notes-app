@@ -2,12 +2,17 @@
 import Image from "next/image";
 import { useContext } from "react";
 import { NotesContext } from "../../context";
+import ChangePassword_form from "../forms/change_pswd_form";
 
-export function Settings_UI() {
+export function Settings_Nav() {
   const { settings, setSettings } = useContext(NotesContext);
 
   return (
-    <section className="md:ml-8 mx-4  h-screen overflow-scroll lg:border-r pr-4">
+    <section
+      className={`${
+        settings ? "hidden" : "block"
+      } md:ml-8 mx-4 lg:block  h-screen overflow-scroll lg:border-r pr-4`}
+    >
       <h1 className="font-bold text-[24px] text-black dark:text-white mb-4 lg:hidden">
         Settings
       </h1>
@@ -107,16 +112,15 @@ export function Settings_UI() {
 }
 
 export function Color_Theme() {
-  const { settings } = useContext(NotesContext);
+  const { setSettings } = useContext(NotesContext);
 
   return (
     <>
-      <div
-        className={`${
-          settings == "Color Theme" ? "block" : "hidden"
-        }mx-4 mt-[25px] w-[50%] `}
-      >
-        <div className="font-medium text-sm text-neutral-600 flex">
+      <div className={`mx-4 md:mx-8 lg:mx-4 mt-[25px] lg:w-[528px] `}>
+        <div
+          onClick={() => setSettings("")}
+          className="font-medium text-sm text-neutral-600 flex lg:hidden"
+        >
           <Image
             src="/assets/images/icon-arrow-left.svg"
             width={20}
@@ -127,7 +131,7 @@ export function Color_Theme() {
 
           <span>Settings</span>
         </div>
-        <div className="mt-3 mb-[20px]">
+        <div className="mt-3 mb-[20px] lg:mt-0">
           <h1 className="font-semibold text-[16px] text-neutral-950">
             Color Theme
           </h1>
@@ -222,28 +226,26 @@ export function Color_Theme() {
 }
 
 export function Font_Theme() {
-  const { settings, setSettings } = useContext(NotesContext);
+  const { setSettings } = useContext(NotesContext);
 
   return (
     <>
-      <div
-        className={`mx-4 mt-[25px] ${
-          settings == "Font Theme" ? "block" : "hidden"
-        }`}
-      >
-        <div className="font-medium text-sm text-neutral-600 flex">
+      <div className={`mx-4 md:mx-8 lg:mx-4 mt-[25px] lg:w-[528px]`}>
+        <div
+          onClick={() => setSettings("")}
+          className="font-medium text-sm text-neutral-600 flex lg:hidden"
+        >
           <Image
             src="/assets/images/icon-arrow-left.svg"
             width={20}
             height={20}
             alt="left"
             className="mr-2"
-            // style={{ filter: "invert(100%)" }}
           />
 
           <span>Settings</span>
         </div>
-        <div className="mt-3 mb-[20px]">
+        <div className="mt-3 lg:mt-0 mb-[20px]">
           <h1 className="font-semibold text-[16px] text-neutral-950">
             Font Theme
           </h1>
@@ -333,6 +335,18 @@ export function Font_Theme() {
           </button>
         </div>
       </div>
+    </>
+  );
+}
+
+export function Settings_UI() {
+  const { settings } = useContext(NotesContext);
+
+  return (
+    <>
+      {settings == "Color Theme" && <Color_Theme />}
+      {settings == "Font Theme" && <Font_Theme />}
+      {settings == "Change Password" && <ChangePassword_form />}
     </>
   );
 }

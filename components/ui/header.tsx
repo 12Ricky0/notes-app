@@ -3,11 +3,24 @@ import Image from "next/image";
 import { useContext } from "react";
 import { NotesContext } from "@/context";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 export default function Header() {
   const { tag } = useContext(NotesContext);
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  function handleSearch(term: string) {
+    const params = new URLSearchParams(searchParams);
+
+    if (term) {
+      params.set("query", term);
+    } else {
+      params.delete("query");
+    }
+    router.replace(`${pathname}?${params.toString()}`);
+  }
 
   return (
     <header className=" lg:bg-none py-[13px] dark:bg-black lg:border-b static">
@@ -43,9 +56,11 @@ export default function Header() {
         <div className="flex gap-4">
           <div className="relative">
             <input
+              onChange={(e) => handleSearch(e.target.value)}
               type="search"
               placeholder="Search by title, content, or tags…"
               className="py-[13px] rounded-lg w-[300px] pl-10 text-[14px] bg-transparent text-neutral-500 focus:outline-none border"
+              defaultValue={searchParams.get("query")?.toString()}
             />
             <Image
               src="/assets/images/icon-search.svg"
