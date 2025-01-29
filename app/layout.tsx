@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${serif.className} bg-white antialiased`}
+        className={`${serif.className} bg-white lg:fixe overflow-scroll antialiased`}
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NotesProvider>{children}</NotesProvider>

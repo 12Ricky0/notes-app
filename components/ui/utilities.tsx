@@ -52,7 +52,7 @@ export function Right_Menu() {
     useContext(NotesContext);
   return (
     <section>
-      <div className="w-[290p] mt-[20px] pl-4 border-l h-screen hidden lg:block mr-8 cursor-pointer">
+      <div className="w-[290p] pt-[20px] pl-4 border-l h-screen hidden lg:block mr-8 cursor-pointer">
         <div className="py-3 px-2 rounded-lg border w-[242px] mb-3">
           <div
             onClick={() => setDisplayArchive(true)}

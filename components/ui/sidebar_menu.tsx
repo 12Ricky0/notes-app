@@ -63,10 +63,10 @@ export default function Sidebar_Menu() {
 
   return (
     <section className="lg:w-[290px] md:w-full lg:border-r dark:bg-black h-screen overflow-scroll ">
-      <div className="lg:pl-8 lg:mr-4 mx-4 md:mx-8 lg:mx-0 md:pt-[20px] lg:last:pb-0 pb-[100px]">
+      <div className="lg:pl-8 lg:mr-4 mx-4 md:mx-8 lg:mx-0 md:pt-[20px] lg:last:pb-0 pb-[90px]">
         <Link
           className="bg-primary-blue hidden lg:flex text-white py-3 rounded-lg font-medium text-[14px] justify-center"
-          href=""
+          href="/dashboard/notes/create"
         >
           + Create New Note
         </Link>
@@ -178,7 +178,10 @@ export default function Sidebar_Menu() {
           </div>
         ))}
       </div>
-      <div className="size-12 lg:hidden fixed  rounded-full bg-primary-blue bottom-[72px] md:bottom-[100px] right-4 md:right-8 flex items-center justify-center">
+      <Link
+        href="/dashboard/notes/create"
+        className="size-12 lg:hidden fixed  rounded-full bg-primary-blue bottom-[72px] md:bottom-[100px] right-4 md:right-8 flex items-center justify-center"
+      >
         <Image
           src="/assets/images/icon-plus.svg"
           width={24}
@@ -186,7 +189,7 @@ export default function Sidebar_Menu() {
           alt="plus"
           className="w-auto h-auto "
         />
-      </div>
+      </Link>
     </section>
   );
 }

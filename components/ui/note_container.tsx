@@ -46,7 +46,7 @@ export default function Note_Container() {
 
   return (
     <section
-      className={`lg:w-[60%] lg:h-screen overflow-scroll  ${
+      className={`lg:w-[60%] lg:h-screen overflow-scroll relative ${
         pathname == "/dashboard/notes/details" ? "block" : "hidden lg:block"
       }`}
     >
@@ -83,22 +83,24 @@ export default function Note_Container() {
           </div>
         </div>
       </article>
-      {formatContent()?.map((content) => (
-        <article
-          key={content.title}
-          className="text-neutral-800 mt-3 text-[14px] mx-4 md:mx-8 lg:mx-6"
-        >
-          <ol className=" my-4">
-            <li>
-              {content.title}
-              <ul className="">
-                <li>{content.details.map((co) => co)}</li>
-              </ul>
-            </li>
-          </ol>
-        </article>
-      ))}
-      <footer className="   border-t mx-6 mb-[20px] hidden lg:block  pt-4 ">
+      <div className="h-[500px]">
+        {formatContent()?.map((content) => (
+          <article
+            key={content.title}
+            className="text-neutral-800 mt-3 text-[14px] mx-4 md:mx-8 lg:mx-6"
+          >
+            <ol className=" my-4">
+              <li>
+                {content.title}
+                <ul className="">
+                  <li>{content.details.map((co) => co)}</li>
+                </ul>
+              </li>
+            </ol>
+          </article>
+        ))}
+      </div>
+      <footer className=" fixed border-t mx-6 w-[60%] mb-[20px] hidden lg:block  pt-4">
         <button className="bg-primary-blue px-4 py-2 text-white font-medium text-[14px] rounded-lg mr-4">
           Save Note
         </button>

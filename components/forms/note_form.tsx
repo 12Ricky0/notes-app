@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function Note_Form() {
   return (
-    <section>
-      <form className="mx-4 border-b pb-3 w-full">
+    <section className="lg:w-[55%] lg:border-r relative">
+      <form className="mx-4 md:mx-8 lg:mx-4 border-b pb-3">
         <input
           className="font-bold text-[20px] md:text-2xl text-black dark:text-white my-3 bg-transparent placeholder:text-black outline-none"
           placeholder="Enter a title... "
@@ -49,11 +49,11 @@ export default function Note_Form() {
       </form>
 
       <textarea
-        className="text-neutral-800 mt-3 text-[14px] mx-4 w-full outline-none bg-transparent h-[460px] placeholder:text-neutral-800"
+        className="text-neutral-800 mt-3 text-[14px] px-4 md:px-8 lg:px-4 w-full outline-none bg-transparent h-[460px] placeholder:text-neutral-800"
         placeholder="Start typing your note here..."
       />
 
-      <footer className="absolute bottom-0 ml-4 mb-[20px] hidden lg:block border-t pt-4 w-full">
+      <footer className="absolute bottom-0 px-4 mb-[20px] lg:w-full hidden lg:block border-t pt-4 ">
         <button className="bg-primary-blue px-4 py-2 text-white font-medium text-[14px] rounded-lg mr-4">
           Save Note
         </button>
