@@ -70,6 +70,13 @@ export default function Sidebar_Menu() {
         >
           + Create New Note
         </Link>
+        {pathname == "/dashboard/notes/create" && (
+          <div className=" mt-4 lg:flex flex-col gap-3 pb-3 cursor-pointer lg:bg-[#F3F5F8] lg:rounded-md lg:px-2 lg:pt-2">
+            <h1 className="font-semibold text-[16px] dark:text-white text-primary-dark">
+              Untitled Note
+            </h1>
+          </div>
+        )}{" "}
         <h1
           className={`font-bold text-black text-[24px] mt-[20px] mb-2 lg:hidden ${
             tag == "" ? "hidden" : "block"
@@ -127,7 +134,7 @@ export default function Sidebar_Menu() {
           <div onClick={() => setTitle(note.title)} key={index}>
             <article
               className={`${
-                title == note.title
+                title == note.title && pathname != "/dashboard/notes/create"
                   ? "lg:bg-[#F3F5F8] lg:rounded-md lg:px-2 lg:pt-2"
                   : "border-b "
               } mt-4 lg:flex flex-col gap-3 pb-3 cursor-pointer hidden `}

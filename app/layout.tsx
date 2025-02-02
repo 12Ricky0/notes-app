@@ -1,19 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata } from "next";
-// import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
 import NotesProvider from "@/context";
 
 const serif = localFont({
-  src: "../public/assets/fonts/inter/Inter-Italic-VariableFont_opsz,wght.ttf",
+  src: "../public/assets/fonts/inter/Inter-VariableFont_opsz,wght.ttf",
+  variable: "--serif",
 });
 
 const sanSerif = localFont({
   src: "../public/assets/fonts/noto-serif/NotoSerif-VariableFont_wdth,wght.ttf",
+  variable: "--sans-serif",
 });
 const monospace = localFont({
   src: "../public/assets/fonts/source-code-pro/SourceCodePro-VariableFont_wght.ttf",
+  variable: "--monospace",
 });
 
 export const metadata: Metadata = {
@@ -29,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${serif.className} bg-white lg:fixe overflow-scroll antialiased`}
+        className={`${serif.variable} ${sanSerif.variable} ${monospace.variable} bg-white overflow-scroll antialiased`}
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NotesProvider>{children}</NotesProvider>

@@ -8,6 +8,11 @@ export default {
   ],
   darkMode: "selector",
   theme: {
+    fontFamily: {
+      monospace: "var(--monospace)",
+      serif: "var(--serif)",
+      sans: "var(--sans-serif)",
+    },
     extend: {
       colors: {
         primary: {

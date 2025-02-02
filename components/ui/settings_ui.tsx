@@ -1,8 +1,9 @@
 "use client";
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { NotesContext } from "../../context";
 import ChangePassword_form from "../forms/change_pswd_form";
+import { useRouter } from "next/navigation";
 
 export function Settings_Nav() {
   const { settings, setSettings } = useContext(NotesContext);
@@ -227,6 +228,44 @@ export function Color_Theme() {
 
 export function Font_Theme() {
   const { setSettings } = useContext(NotesContext);
+  const router = useRouter();
+  const fonts = [
+    {
+      name: "Sans-serif",
+      value: "sans",
+    },
+    { name: "Serif", value: "serif" },
+    { name: "Monospace", value: "monospace" },
+  ];
+  const [selectedFont, setSelectedFont] = useState("serif");
+
+  useEffect(() => {
+    const savedFont = localStorage.getItem("fontTheme");
+    if (savedFont) {
+      setSelectedFont(savedFont);
+    } else {
+      localStorage.setItem("fontTheme", "serif");
+    }
+  }, []);
+
+  const handleFontChange = (font: string) => {
+    setSelectedFont(font);
+  };
+
+  const applyFontClass = (font: string) => {
+    document.body.classList.remove("font-sans", "font-serif", "font-monospace");
+    document.body.classList.add("font-" + font);
+  };
+
+  const applyChanges = () => {
+    // Save to local storage
+    localStorage.setItem("fontTheme", selectedFont);
+    const savedFont = localStorage.getItem("fontTheme");
+    if (savedFont) {
+      applyFontClass(savedFont);
+    }
+    router.refresh();
+  };
 
   return (
     <>
@@ -253,83 +292,46 @@ export function Font_Theme() {
             Choose your font theme:
           </p>
         </div>
+        {fonts.map((font, index) => (
+          <div key={index}>
+            <div className="flex border py-[17px] rounded-xl bg-slate-100 justify-between items-center mb-4">
+              <div className="flex">
+                <div className="size-[40px] rounded-xl bg-white flex justify-center items-center border mx-4">
+                  <Image
+                    src={`/assets/images/icon-font-${font.value}.svg`}
+                    width={24}
+                    height={24}
+                    alt={font.name}
+                  />
+                </div>
 
-        <div className="flex border py-[17px] rounded-xl bg-slate-100 justify-between items-center mb-4">
-          <div className="flex">
-            <div className="size-[40px] rounded-xl bg-white flex justify-center items-center border mx-4">
-              <Image
-                src="/assets/images/icon-font-sans-serif.svg"
-                width={24}
-                height={24}
-                alt="sanSerif"
-              />
-            </div>
-
-            <div>
-              <h1 className="font-medium text-neutral-950 text-sm">
-                Sans-serif
-              </h1>
-              <p className="text-xs font-normal text-neutral-700">
-                Clean and modern, easy to read.
-              </p>
-            </div>
-          </div>
-          <label className="inline-flex items-center mr-4">
-            <input type="radio" name="custom-option" className="hidden peer" />
-            <div className="size-4 rounded-full border-2 border-gray-300 peer-checked:border-primary-blue peer-checked:bg-white peer-checked:border-[4px]" />
-          </label>{" "}
-        </div>
-
-        <div className="flex border py-[17px] rounded-xl bg-slate-100 justify-between items-center mb-4">
-          <div className="flex">
-            <div className="size-[40px] rounded-xl bg-white flex justify-center items-center border mx-4">
-              <Image
-                src="/assets/images/icon-font-serif.svg"
-                width={24}
-                height={24}
-                alt="serif"
-              />
-            </div>
-
-            <div>
-              <h1 className="font-medium text-neutral-950 text-sm">Serif</h1>
-              <p className="text-xs font-normal text-neutral-700">
-                Classic and elegant for a timeless feel.
-              </p>
+                <div>
+                  <h1 className="font-medium text-neutral-950 text-sm">
+                    {font.name}
+                  </h1>
+                  <p className="text-xs font-normal text-neutral-700">
+                    {font.value === "sans-serif"
+                      ? "Clean and modern, easy to read."
+                      : font.value === "serif"
+                      ? "Classic and elegant for a timeless feel."
+                      : "Code-like, great for a technical vibe."}
+                  </p>
+                </div>
+              </div>
+              <label className="inline-flex items-center mr-4 cursor-pointer">
+                <input
+                  type="radio"
+                  name={font.name}
+                  checked={selectedFont === font.value}
+                  onChange={() => handleFontChange(font.value)}
+                  className="hidden peer"
+                />
+                <div className="size-4 rounded-full border-2 border-gray-300 peer-checked:border-primary-blue peer-checked:bg-white peer-checked:border-[4px]" />
+              </label>{" "}
             </div>
           </div>
-          <label className="inline-flex items-center mr-4">
-            <input type="radio" name="custom-option" className="hidden peer" />
-            <div className="size-4 rounded-full border-2 border-gray-300 peer-checked:border-primary-blue peer-checked:bg-white peer-checked:border-[4px]" />
-          </label>{" "}
-        </div>
-
-        <div className="flex border py-[17px] rounded-xl bg-slate-100 justify-between items-center mb-4">
-          <div className="flex">
-            <div className="size-[40px] rounded-xl bg-white flex justify-center items-center border mx-4">
-              <Image
-                src="/assets/images/icon-font-monospace.svg"
-                width={24}
-                height={24}
-                alt="monospace"
-              />
-            </div>
-
-            <div>
-              <h1 className="font-medium text-neutral-950 text-sm">
-                Monospace
-              </h1>
-              <p className="text-xs font-normal text-neutral-700">
-                Code-like, great for a technical vibe.
-              </p>
-            </div>
-          </div>
-          <label className="inline-flex items-center mr-4">
-            <input type="radio" name="custom-option" className="hidden peer" />
-            <div className="size-4 rounded-full border-2 border-gray-300 peer-checked:border-primary-blue peer-checked:bg-white peer-checked:border-[4px]" />
-          </label>{" "}
-        </div>
-        <div className="flex justify-end">
+        ))}
+        <div onClick={applyChanges} className="flex justify-end">
           <button className="px-4  py-3 bg-primary-blue text-white rounded-lg font-medium text-smtransition">
             Apply Changes
           </button>

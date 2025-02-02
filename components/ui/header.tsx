@@ -33,7 +33,7 @@ export default function Header() {
       />
       <div className="lg:flex justify-between items-center mx-8 hidden ">
         {pathname == "/dashboard/settings" ? (
-          <h1 className={`font-bold text-black text-[24px] `}>Settings</h1>
+          <h1 className={`font-bold text-black text-[24px]`}>Settings</h1>
         ) : (
           <>
             <h1

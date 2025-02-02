@@ -6,6 +6,7 @@ import React, {
   ReactNode,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from "react";
 
 // Define the type of your context
@@ -22,6 +23,8 @@ type NotesContextType = {
   setDisplayArchive: Dispatch<SetStateAction<boolean>>;
   displayDelete: boolean;
   setDisplayDelete: Dispatch<SetStateAction<boolean>>;
+  // selectedFont: string;
+  // setSelectedFont: Dispatch<SetStateAction<string>>;
 };
 
 // Create the context with an initial value of `undefined`
@@ -37,6 +40,21 @@ export default function NotesProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<string>("Home");
   const [displayArchive, setDisplayArchive] = useState<boolean>(false);
   const [displayDelete, setDisplayDelete] = useState<boolean>(false);
+  // const [selectedFont, setSelectedFont] = useState("sans");
+  // useEffect(() => {
+  //   const font = localStorage.getItem("fontTheme");
+  //   setSelectedFont(font!);
+  // }, [selectedFont]);
+
+  useEffect(() => {
+    const savedFont = localStorage.getItem("fontTheme");
+    if (savedFont) {
+      // applyFontClass(savedFont);
+      document.body.classList.add("font-" + savedFont);
+    } else {
+      document.body.classList.add("font-serif");
+    }
+  }, []);
 
   return (
     <NotesContext.Provider
@@ -53,6 +71,8 @@ export default function NotesProvider({ children }: { children: ReactNode }) {
         setDisplayDelete,
         settings,
         setSettings,
+        // selectedFont,
+        // setSelectedFont,
       }}
     >
       {children}
