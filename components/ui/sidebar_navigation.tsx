@@ -20,11 +20,11 @@ export default function Sidebar_Nav() {
   // Convert the Set back to an array
   const tagsArray = Array.from(uniqueTags).sort();
 
-  const { tag, setTag, setMenu, menu } = useContext(NotesContext);
+  const { tag, setTag, setMenu, menu, darkMode } = useContext(NotesContext);
   const router = useRouter();
 
   return (
-    <section className="lg:border-r lg:h-screen overflow-scroll lg:w-[272px]">
+    <section className="lg:border-r dark:lg:border-neutral-800 lg:h-screen overflow-scroll lg:w-[272px]">
       <Image
         src="/assets/images/logo.svg"
         width={24}
@@ -34,12 +34,12 @@ export default function Sidebar_Nav() {
       />
 
       <>
-        <nav className="mx-4 mt-4 hidden  lg:block">
+        <nav className="mx-4 mt-4 hidden dark:text-neutral-200 lg:block">
           <div onClick={() => setTag("")}>
             <Link
               href="/dashboard/notes"
               className={`flex text-[14px] cursor-pointer ${
-                tag.length == 0 && "bg-neutral-200 "
+                tag.length == 0 && "bg-neutral-200 dark:bg-neutral-800"
               }  rounded-lg p-3 justify-between items-center`}
             >
               <div className="inline-flex items-center ">
@@ -49,22 +49,40 @@ export default function Sidebar_Nav() {
                   height="24"
                   fill="none"
                   viewBox="0 0 24 24"
-                  className="w-auto h-auto mr-2"
+                  className="w-auto h-auto mr-2 "
                 >
                   <path
-                    fill={`${tag.length == 0 ? "#335CFF" : "#0E121B"} `}
+                    fill={`${
+                      tag.length == 0
+                        ? "#335CFF"
+                        : darkMode
+                        ? "#E0E4EA"
+                        : "#0E121B"
+                    } `}
                     fillRule="evenodd"
                     d="M4.496 8.025a.75.75 0 0 1 .75.75v8.675a2.314 2.314 0 0 0 2.314 2.314h8.88a2.314 2.314 0 0 0 2.313-2.314V8.775a.75.75 0 0 1 1.5 0v8.675a3.814 3.814 0 0 1-3.814 3.814H7.56a3.814 3.814 0 0 1-3.814-3.814V8.775a.75.75 0 0 1 .75-.75Z"
                     clipRule="evenodd"
                   />
                   <path
-                    fill={`${tag.length == 0 ? "#335CFF" : "#0E121B"} `}
+                    fill={`${
+                      tag.length == 0
+                        ? "#335CFF"
+                        : darkMode
+                        ? "#E0E4EA"
+                        : "#0E121B"
+                    } `}
                     fillRule="evenodd"
                     d="M10.06 3.41a3.127 3.127 0 0 1 3.88 0l7.525 5.958a.75.75 0 1 1-.93 1.176l-7.526-5.957a1.628 1.628 0 0 0-2.018 0l-7.525 5.957a.75.75 0 1 1-.931-1.176L10.06 3.41Z"
                     clipRule="evenodd"
                   />
                   <path
-                    fill={`${tag.length == 0 ? "#335CFF" : "#0E121B"} `}
+                    fill={`${
+                      tag.length == 0
+                        ? "#335CFF"
+                        : darkMode
+                        ? "#E0E4EA"
+                        : "#0E121B"
+                    } `}
                     fillRule="evenodd"
                     d="M17.668 4.193a.75.75 0 0 1 .75.75v2.354a.75.75 0 0 1-1.5 0V4.943a.75.75 0 0 1 .75-.75ZM11.974 13.688h.055c.377 0 .702 0 .97.02.283.022.565.071.838.203a2.25 2.25 0 0 1 1.05 1.05c.131.272.18.554.202.837.02.268.02.593.02.97v3.746a.75.75 0 0 1-1.5 0v-3.718c0-.412 0-.678-.015-.881-.016-.195-.041-.268-.059-.303a.75.75 0 0 0-.35-.35c-.035-.017-.108-.043-.302-.058a12.747 12.747 0 0 0-.881-.017c-.412 0-.679.001-.881.017-.195.015-.268.04-.303.058a.75.75 0 0 0-.35.35c-.017.035-.043.108-.058.303-.016.203-.016.469-.016.88v3.72a.75.75 0 0 1-1.5 0v-3.747c0-.377 0-.702.02-.97.022-.283.071-.565.203-.838a2.25 2.25 0 0 1 1.05-1.05c.273-.131.554-.18.837-.202.268-.02.593-.02.97-.02Z"
                     clipRule="evenodd"
@@ -74,7 +92,9 @@ export default function Sidebar_Nav() {
               </div>
 
               <Image
-                src="/assets/images/icon-chevron-right.svg"
+                src={`/assets/images/icon-chevron-right${
+                  darkMode ? "-white" : ""
+                }.svg`}
                 width={24}
                 height={24}
                 alt="arrow-right"
@@ -88,7 +108,8 @@ export default function Sidebar_Nav() {
             <Link
               href="/dashboard/notes"
               className={`flex justify-between cursor-pointer p-3 items-center ${
-                tag == "Archieved" && "bg-neutral-200 rounded-lg "
+                tag == "Archieved" &&
+                "bg-neutral-200 dark:bg-neutral-800 rounded-lg "
               }`}
             >
               <div className={`flex text-[14px]  `}>
@@ -101,14 +122,26 @@ export default function Sidebar_Nav() {
                   className="w-auto h-auto mr-2"
                 >
                   <path
-                    stroke={`${tag == "Archieved" ? "#335CFF" : "#0E121B"} `}
+                    stroke={`${
+                      tag == "Archieved"
+                        ? "#335CFF"
+                        : darkMode
+                        ? "#E0E4EA"
+                        : "#0E121B"
+                    } `}
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="1.5"
                     d="M21 7.782v8.435C21 19.165 18.919 21 15.974 21H8.026C5.081 21 3 19.165 3 16.216V7.782C3 4.834 5.081 3 8.026 3h7.948C18.919 3 21 4.843 21 7.782Z"
                   />
                   <path
-                    stroke={`${tag == "Archieved" ? "#335CFF" : "#0E121B"} `}
+                    stroke={`${
+                      tag == "Archieved"
+                        ? "#335CFF"
+                        : darkMode
+                        ? "#E0E4EA"
+                        : "#0E121B"
+                    } `}
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="1.5"
@@ -118,7 +151,9 @@ export default function Sidebar_Nav() {
                 <span>Archived Notes</span>
               </div>
               <Image
-                src="/assets/images/icon-chevron-right.svg"
+                src={`/assets/images/icon-chevron-right${
+                  darkMode ? "-white" : ""
+                }.svg`}
                 width={24}
                 height={24}
                 alt="arrow-right"
@@ -128,7 +163,7 @@ export default function Sidebar_Nav() {
               />
             </Link>
           </div>
-          <div className="border-t mt-2">
+          <div className="border-t dark:lg:border-neutral-800 mt-2">
             <h1 className="mt-2 ml-3 mb-2 font-medium text-neutral-500 text-[14px]">
               Tags
             </h1>
@@ -138,7 +173,8 @@ export default function Sidebar_Nav() {
                 <Link
                   href="/dashboard/notes"
                   className={`justify-between cursor-pointer flex p-3 ${
-                    tag == tagName && "bg-neutral-200 rounded-lg "
+                    tag == tagName &&
+                    "bg-neutral-200 dark:bg-neutral-800 rounded-lg "
                   }`}
                 >
                   <div className={`flex items-center  justify-start  `}>
@@ -151,7 +187,13 @@ export default function Sidebar_Nav() {
                       viewBox="0 0 24 24"
                     >
                       <path
-                        stroke={`${tag == tagName ? "#335CFF" : "#0E121B"} `}
+                        stroke={`${
+                          tag == tagName
+                            ? "#335CFF"
+                            : darkMode
+                            ? "#E0E4EA"
+                            : "#0E121B"
+                        } `}
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="1.8"
@@ -159,7 +201,13 @@ export default function Sidebar_Nav() {
                         clipRule="evenodd"
                       />
                       <path
-                        stroke={`${tag == tagName ? "#335CFF" : "#0E121B"} `}
+                        stroke={`${
+                          tag == tagName
+                            ? "#335CFF"
+                            : darkMode
+                            ? "#E0E4EA"
+                            : "#0E121B"
+                        } `}
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="1.8"
@@ -167,13 +215,15 @@ export default function Sidebar_Nav() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span className=" text-[14px] text-neutral-700">
+                    <span className=" text-[14px] text-neutral-700 dark:text-neutral-200">
                       {tagName as string}
                     </span>
                   </div>
 
                   <Image
-                    src="/assets/images/icon-chevron-right.svg"
+                    src={`/assets/images/icon-chevron-right${
+                      darkMode ? "-white" : ""
+                    }.svg`}
                     width={24}
                     height={24}
                     alt="arrow-right"
@@ -189,7 +239,7 @@ export default function Sidebar_Nav() {
       </>
 
       <>
-        <footer className=" bottom-0 border-t py-3 w-full justify-between bg-white md:px-8 px-4 fixed flex lg:hidden">
+        <footer className=" bottom-0 border-t py-3 w-full justify-between bg-white dark:bg-neutral-950 dark:border-neutral-800 dark:shadow-lg md:px-8 px-4 fixed flex lg:hidden">
           <div
             onClick={() => {
               setMenu("Home");

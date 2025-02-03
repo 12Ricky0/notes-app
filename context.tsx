@@ -23,11 +23,10 @@ type NotesContextType = {
   setDisplayArchive: Dispatch<SetStateAction<boolean>>;
   displayDelete: boolean;
   setDisplayDelete: Dispatch<SetStateAction<boolean>>;
-  // selectedFont: string;
-  // setSelectedFont: Dispatch<SetStateAction<string>>;
+  darkMode: boolean;
+  setDarkMode: Dispatch<SetStateAction<boolean>>;
 };
 
-// Create the context with an initial value of `undefined`
 export const NotesContext = createContext<NotesContextType>(
   {} as NotesContextType
 );
@@ -40,14 +39,13 @@ export default function NotesProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<string>("Home");
   const [displayArchive, setDisplayArchive] = useState<boolean>(false);
   const [displayDelete, setDisplayDelete] = useState<boolean>(false);
-  // const [selectedFont, setSelectedFont] = useState("sans");
-  // useEffect(() => {
-  //   const font = localStorage.getItem("fontTheme");
-  //   setSelectedFont(font!);
-  // }, [selectedFont]);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     const savedFont = localStorage.getItem("fontTheme");
+    if (localStorage.getItem("theme") === "dark") {
+      setDarkMode(true);
+    }
     if (savedFont) {
       // applyFontClass(savedFont);
       document.body.classList.add("font-" + savedFont);
@@ -56,6 +54,19 @@ export default function NotesProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  useEffect(() => {
+    if (
+      darkMode ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
   return (
     <NotesContext.Provider
       value={{
@@ -71,8 +82,8 @@ export default function NotesProvider({ children }: { children: ReactNode }) {
         setDisplayDelete,
         settings,
         setSettings,
-        // selectedFont,
-        // setSelectedFont,
+        darkMode,
+        setDarkMode,
       }}
     >
       {children}

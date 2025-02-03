@@ -52,8 +52,8 @@ export function Right_Menu() {
     useContext(NotesContext);
   return (
     <section>
-      <div className="w-[290p] pt-[20px] pl-4 border-l h-screen hidden lg:block mr-8 cursor-pointer">
-        <div className="py-3 px-2 rounded-lg border w-[242px] mb-3">
+      <div className="w-[290p] pt-[20px] pl-4 border-l dark:border-neutral-800 h-screen hidden lg:block mr-8 cursor-pointer">
+        <div className="py-3 px-2 rounded-lg border dark:border-neutral-600 w-[242px] mb-3">
           <div
             onClick={() => setDisplayArchive(true)}
             className="flex items-center gap-2"
@@ -90,7 +90,7 @@ export function Right_Menu() {
         </div>
         <div
           onClick={() => setDisplayDelete(true)}
-          className="py-3 px-2 rounded-lg border w-[242px] mb-3"
+          className="py-3 px-2 rounded-lg border dark:border-neutral-600 w-[242px] mb-3"
         >
           <div className="flex items-center gap-2">
             <svg

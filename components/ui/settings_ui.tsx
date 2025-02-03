@@ -113,7 +113,34 @@ export function Settings_Nav() {
 }
 
 export function Color_Theme() {
-  const { setSettings } = useContext(NotesContext);
+  const { setSettings, setDarkMode } = useContext(NotesContext);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "system");
+
+  // Apply the theme to <body> when the user selects an option
+  const applyTheme = (mode: string) => {
+    localStorage.setItem("theme", mode);
+    setTheme(mode);
+
+    if (mode === "dark") {
+      // document.body.classList.add("dark-mode");
+      setDarkMode(true);
+    } else if (mode === "light") {
+      // document.body.classList.remove("dark-mode");
+      setDarkMode(false);
+    } else {
+      // System theme - detect user's preference
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      if (prefersDark) {
+        // document.body.classList.add("dark-mode");
+        setDarkMode(true);
+      } else {
+        // document.body.classList.remove("dark-mode");
+        setDarkMode(false);
+      }
+    }
+  };
 
   return (
     <>
@@ -162,7 +189,15 @@ export function Color_Theme() {
             </div>
           </div>
           <label className="inline-flex items-center mr-4">
-            <input type="radio" name="custom-option" className="hidden peer" />
+            <input
+              // onChange={() => setDarkMode(false)}
+              // checked={darkMode === false}
+              checked={theme === "light"}
+              onChange={() => applyTheme("light")}
+              type="radio"
+              name="custom-option"
+              className="hidden peer"
+            />
             <div className="size-4 rounded-full border-2 border-gray-300 peer-checked:border-primary-blue peer-checked:bg-white peer-checked:border-[4px]" />
           </label>{" "}
         </div>
@@ -188,7 +223,13 @@ export function Color_Theme() {
             </div>
           </div>
           <label className="inline-flex items-center mr-4">
-            <input type="radio" name="custom-option" className="hidden peer" />
+            <input
+              checked={theme === "dark"}
+              onChange={() => applyTheme("dark")}
+              type="radio"
+              name="custom-option"
+              className="hidden peer"
+            />
             <div className="size-4 rounded-full border-2 border-gray-300 peer-checked:border-primary-blue peer-checked:bg-white peer-checked:border-[4px]" />
           </label>{" "}
         </div>
@@ -212,7 +253,13 @@ export function Color_Theme() {
             </div>
           </div>
           <label className="inline-flex items-center mr-4">
-            <input type="radio" name="custom-option" className="hidden peer" />
+            <input
+              checked={theme === "system"}
+              onChange={() => applyTheme("system")}
+              type="radio"
+              name="custom-option"
+              className="hidden peer"
+            />
             <div className="size-4 rounded-full border-2 border-gray-300 peer-checked:border-primary-blue peer-checked:bg-white peer-checked:border-[4px]" />
           </label>{" "}
         </div>

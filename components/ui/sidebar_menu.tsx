@@ -62,7 +62,7 @@ export default function Sidebar_Menu() {
   }
 
   return (
-    <section className="lg:w-[290px] md:w-full lg:border-r dark:bg-black h-screen overflow-scroll ">
+    <section className="lg:w-[290px] md:w-full lg:border-r dark:lg:border-neutral-800 dark:bg-black h-screen overflow-scroll ">
       <div className="lg:pl-8 lg:mr-4 mx-4 md:mx-8 lg:mx-0 md:pt-[20px] lg:last:pb-0 pb-[90px]">
         <Link
           className="bg-primary-blue hidden lg:flex text-white py-3 rounded-lg font-medium text-[14px] justify-center"
@@ -78,7 +78,7 @@ export default function Sidebar_Menu() {
           </div>
         )}{" "}
         <h1
-          className={`font-bold text-black text-[24px] mt-[20px] mb-2 lg:hidden ${
+          className={`font-bold text-black dark:text-white text-[24px] mt-[20px] mb-2 lg:hidden ${
             tag == "" ? "hidden" : "block"
           }`}
         >
@@ -86,7 +86,7 @@ export default function Sidebar_Menu() {
           {tag}
         </h1>
         <h1
-          className={`font-bold text-black text-[24px] mt-[20px] mb-2 lg:hidden ${
+          className={`font-bold text-black dark:text-white text-[24px] mt-[20px] mb-2 lg:hidden ${
             tag == "" ? "block" : "hidden"
           }`}
         >
@@ -105,7 +105,7 @@ export default function Sidebar_Menu() {
               type="search"
               onChange={(e) => handleSearch(e.target.value)}
               placeholder="Search by title, content, or tags…"
-              className="py-[13px] rounded-lg w-full pl-10 text-[14px] bg-transparent text-neutral-500 focus:outline-none border"
+              className="py-[13px] rounded-lg w-full pl-10 text-[14px] bg-transparent text-neutral-500 dark:border-neutral-800 focus:outline-none border"
               defaultValue={searchInput}
             />
             <Image
@@ -118,7 +118,9 @@ export default function Sidebar_Menu() {
           </div>
         )}
         {tag == "Archieved" && (
-          <p className={`text-neutral-700 font-normal text-[14px] my-4 `}>
+          <p
+            className={`text-neutral-700 dark:text-neutral-200 font-normal text-[14px] my-4 `}
+          >
             All your archived notes are stored here. You can restore or delete
             them anytime.
           </p>
@@ -135,8 +137,8 @@ export default function Sidebar_Menu() {
             <article
               className={`${
                 title == note.title && pathname != "/dashboard/notes/create"
-                  ? "lg:bg-[#F3F5F8] lg:rounded-md lg:px-2 lg:pt-2"
-                  : "border-b "
+                  ? "lg:bg-[#F3F5F8] dark:bg-neutral-800 lg:rounded-md lg:px-2 lg:pt-2"
+                  : "border-b dark:border-neutral-800"
               } mt-4 lg:flex flex-col gap-3 pb-3 cursor-pointer hidden `}
             >
               <h1 className="font-semibold text-[16px] dark:text-white text-primary-dark">
@@ -146,13 +148,13 @@ export default function Sidebar_Menu() {
                 {note.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="bg-neutral-200 dark:bg-neutral-700 dark:text-white px-[6px] text-[12px] py-[2px] font-normal text-primary-dark rounded-[4px] mr-1"
+                    className="bg-neutral-200 dark:bg-neutral-600 dark:text-white px-[6px] text-[12px] py-[2px] font-normal text-primary-dark rounded-[4px] mr-1"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
-              <p className=" text-[12px] dark:text-white font-normal text-neutral-700">
+              <p className=" text-[12px] dark:text-neutral-300 font-normal text-neutral-700">
                 {date(note.lastEdited.split("T")[0])}
               </p>
             </article>
@@ -160,8 +162,8 @@ export default function Sidebar_Menu() {
               <article
                 className={`${
                   title == note.title
-                    ? "lg:bg-[#F3F5F8] lg:rounded-md lg:px-2 lg:pt-2"
-                    : "border-b "
+                    ? "lg:bg-[#F3F5F8] dark:bg-neutral-800 rounded-md px-2 pt-2"
+                    : "border-b dark:border-neutral-800"
                 } mt-4 flex flex-col gap-3 pb-3 cursor-pointer `}
               >
                 <h1 className="font-semibold text-[16px] dark:text-white text-primary-dark">
@@ -171,13 +173,13 @@ export default function Sidebar_Menu() {
                   {note.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="bg-neutral-200 dark:bg-neutral-700 dark:text-white px-[6px] text-[12px] py-[2px] font-normal text-primary-dark rounded-[4px] mr-1"
+                      className="bg-neutral-200 dark:bg-neutral-600 dark:text-white px-[6px] text-[12px] py-[2px] font-normal text-primary-dark rounded-[4px] mr-1"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <p className=" text-[12px] dark:text-white font-normal text-neutral-700">
+                <p className=" text-[12px] dark:text-neutral-300 font-normal text-neutral-700">
                   {date(note.lastEdited.split("T")[0])}
                 </p>
               </article>

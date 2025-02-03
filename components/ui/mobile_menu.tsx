@@ -19,7 +19,7 @@ export function Tags() {
   // Convert the Set back to an array
   const tagsArray = Array.from(uniqueTags).sort();
 
-  const { tag, setTag, menu } = useContext(NotesContext);
+  const { tag, setTag, menu, darkMode } = useContext(NotesContext);
   const router = useRouter();
 
   return (
@@ -36,7 +36,7 @@ export function Tags() {
         <>
           <nav className="mx-4 md:mx-8 mt-4">
             <div className=" ">
-              <h1 className="mt-2 mb- font-bold text-black text-[24px]">
+              <h1 className="mt-2 mb- font-bold text-black dark:text-white text-[24px]">
                 Tags
               </h1>
 
@@ -47,7 +47,7 @@ export function Tags() {
                     router.push("/dashboard/notes");
                   }}
                   key={index}
-                  className={`justify-between cursor-pointer flex py-3 border-b `}
+                  className={`justify-between cursor-pointer flex py-3 border-b dark:border-neutral-800`}
                 >
                   <div className={`flex items-center  justify-start  `}>
                     <svg
@@ -59,7 +59,13 @@ export function Tags() {
                       viewBox="0 0 24 24"
                     >
                       <path
-                        stroke={`${tag == tagName ? "#335CFF" : "#2B303B"} `}
+                        stroke={`${
+                          tag == tagName
+                            ? "#335CFF"
+                            : darkMode
+                            ? "#CACFD8"
+                            : "#2B303B"
+                        } `}
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="1.8"
@@ -67,7 +73,13 @@ export function Tags() {
                         clipRule="evenodd"
                       />
                       <path
-                        stroke={`${tag == tagName ? "#335CFF" : "#2B303B"} `}
+                        stroke={`${
+                          tag == tagName
+                            ? "#335CFF"
+                            : darkMode
+                            ? "#CACFD8"
+                            : "#2B303B"
+                        } `}
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="1.8"
@@ -75,7 +87,7 @@ export function Tags() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span className=" text-[14px] text-neutral-700">
+                    <span className=" text-[14px] text-neutral-700 dark:text-neutral-300">
                       {tagName as string}
                     </span>
                   </div>
