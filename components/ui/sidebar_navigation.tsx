@@ -26,7 +26,7 @@ export default function Sidebar_Nav() {
   return (
     <section className="lg:border-r dark:lg:border-neutral-800 lg:h-screen overflow-scroll lg:w-[272px]">
       <Image
-        src="/assets/images/logo.svg"
+        src={`/assets/images/logo${darkMode ? "-dark" : ""}.svg`}
         width={24}
         height={24}
         alt="logo"

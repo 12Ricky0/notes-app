@@ -71,7 +71,7 @@ export default function Sidebar_Menu() {
           + Create New Note
         </Link>
         {pathname == "/dashboard/notes/create" && (
-          <div className=" mt-4 lg:flex flex-col gap-3 pb-3 cursor-pointer lg:bg-[#F3F5F8] lg:rounded-md lg:px-2 lg:pt-2">
+          <div className=" mt-4 lg:flex flex-col gap-3 pb-3 cursor-pointer bg-[#F3F5F8] dark:bg-neutral-800 hidden lg:rounded-md lg:px-2 lg:pt-2">
             <h1 className="font-semibold text-[16px] dark:text-white text-primary-dark">
               Untitled Note
             </h1>
