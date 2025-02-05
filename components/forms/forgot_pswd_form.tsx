@@ -1,20 +1,23 @@
 "use client";
 
 import Image from "next/image";
+import { useContext } from "react";
+import { NotesContext } from "../../context";
 
 export default function Forgot_form() {
+  const { darkMode } = useContext(NotesContext);
   return (
-    <section className="mx-4 border rounded-lg text-center bg-white dark:bg-primary-dark  md:w-[540px]">
+    <section className="mx-4 border rounded-lg text-center bg-white dark:border-neutral-800 dark:bg-primary-dark  md:w-[540px]">
       <article className="my-[40px] ">
         <Image
-          src="/assets/images/logo.svg"
+          src={`/assets/images/logo${darkMode ? "-dark" : ""}.svg`}
           width={24}
           height={24}
           alt="logo"
           className="w-auto h-auto mx-auto"
         />
         <h1 className="mt-4 mb-2 text-[24px] text-primary-dark dark:text-white font-bold">
-          Forgotten your password
+          Forgotten your password?
         </h1>
         <p className="text-[14px] font-normal text-tetiary-semi-dark dark:text-secondary-light-gray">
           Enter your email below, and we’ll send you a link to reset it.
@@ -33,7 +36,7 @@ export default function Forgot_form() {
             Email Address
           </label>
           <input
-            className="border cursor-pointer rounded-lg hover:bg-neutral-300 py-3 w-full px-3 mb-4 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4 "
+            className="border cursor-pointer rounded-lg dark:bg-transparent dark:hover:bg-neutral-800 hover:bg-neutral-300 py-3 w-full px-3 mb-4 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4 "
             type="email"
             placeholder="email@example.com"
           />

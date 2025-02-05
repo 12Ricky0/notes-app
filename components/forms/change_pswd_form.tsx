@@ -6,15 +6,15 @@ import { NotesContext } from "../../context";
 
 export default function ChangePassword_form() {
   const [showPassword, setShowPassword] = useState(false);
-  const { setSettings } = useContext(NotesContext);
+  const { setSettings, darkMode } = useContext(NotesContext);
   return (
     <div className={`mx-4 md:mx-8 lg:mx-4 mt-[16px] lg:w-[528px] `}>
       <div
         onClick={() => setSettings("")}
-        className="font-medium text-sm text-neutral-600 flex lg:hidden"
+        className="font-medium text-sm text-neutral-600 dark:text-neutral-300 flex lg:hidden"
       >
         <Image
-          src="/assets/images/icon-arrow-left.svg"
+          src={`/assets/images/icon-arrow-left${darkMode ? "-white" : ""}.svg`}
           width={20}
           height={20}
           alt="left"
@@ -24,25 +24,28 @@ export default function ChangePassword_form() {
         <span>Settings</span>
       </div>
       <div className="mt-3 mb-[20px] lg:mt-0">
-        <h1 className="font-semibold text-[16px] text-neutral-950">
+        <h1 className="font-semibold text-[16px] text-neutral-950 dark:text-white">
           Change Password
         </h1>
       </div>
       <form action="">
         <fieldset className="flex justify-between">
-          <label className=" mb-[6px] font-medium" htmlFor="password">
+          <label
+            className=" mb-[6px] font-medium dark:text-white text-[14px]"
+            htmlFor="password"
+          >
             Old Password
           </label>
         </fieldset>
         <div className="relative">
           <input
-            className="border cursor-pointer rounded-lg py-3 w-full px-3 mb-4 hover:bg-neutral-300 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4"
+            className="border cursor-pointer rounded-lg py-3 w-full px-3 mb-4 dark:bg-transparent dark:border-neutral-600 dark:hover:bg-neutral-800 hover:bg-neutral-300 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4"
             type={showPassword ? "text" : "password"}
           />
           <Image
             src={`/assets/images/icon-${
               showPassword ? "hide" : "show"
-            }-password.svg`}
+            }-password${darkMode ? "-white" : ""}.svg`}
             width={24}
             height={24}
             alt="pss"
@@ -52,19 +55,22 @@ export default function ChangePassword_form() {
         </div>
 
         <fieldset className="flex justify-between">
-          <label className=" mb-[6px] font-medium" htmlFor="password">
+          <label
+            className=" mb-[6px] font-medium dark:text-white text-[14px]"
+            htmlFor="password"
+          >
             New Password
           </label>
         </fieldset>
         <div className="relative">
           <input
-            className="border cursor-pointer rounded-lg py-3 w-full px-3  hover:bg-neutral-300 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4"
+            className="border cursor-pointer rounded-lg py-3 w-full px-3 dark:bg-transparent dark:border-neutral-600 dark:hover:bg-neutral-800  hover:bg-neutral-300 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4"
             type={showPassword ? "text" : "password"}
           />
           <Image
             src={`/assets/images/icon-${
               showPassword ? "hide" : "show"
-            }-password.svg`}
+            }-password${darkMode ? "-white" : ""}.svg`}
             width={24}
             height={24}
             alt="pss"
@@ -74,7 +80,7 @@ export default function ChangePassword_form() {
 
           <div className="flex mb-4 mt-[6px] items-center gap-2 text-[12px] text-tetiary-semi-dark dark:text-secondary-light-gray">
             <Image
-              src="/assets/images/icon-info.svg"
+              src={`/assets/images/icon-info${darkMode ? "-white" : ""}.svg`}
               width={14}
               height={14}
               alt="info"
@@ -85,19 +91,22 @@ export default function ChangePassword_form() {
         </div>
 
         <fieldset className="flex justify-between">
-          <label className=" mb-[6px] font-medium" htmlFor="password">
+          <label
+            className=" mb-[6px] font-medium text-[14px] dark:text-white"
+            htmlFor="password"
+          >
             Confirm New Password
           </label>
         </fieldset>
         <div className="relative">
           <input
-            className="border cursor-pointer rounded-lg py-3 w-full px-3 mb-4 hover:bg-neutral-300 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4"
+            className="border cursor-pointer rounded-lg py-3 w-full px-3 mb-4 dark:bg-transparent dark:border-neutral-600 dark:hover:bg-neutral-800 hover:bg-neutral-300 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4"
             type={showPassword ? "text" : "password"}
           />
           <Image
             src={`/assets/images/icon-${
               showPassword ? "hide" : "show"
-            }-password.svg`}
+            }-password${darkMode ? "-white" : ""}.svg`}
             width={24}
             height={24}
             alt="pss"

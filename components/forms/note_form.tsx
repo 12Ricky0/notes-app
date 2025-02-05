@@ -1,18 +1,22 @@
+"use client";
 import Image from "next/image";
+import { useContext } from "react";
+import { NotesContext } from "../../context";
 
 export default function Note_Form() {
+  const { darkMode } = useContext(NotesContext);
   return (
-    <section className="lg:w-[55%] lg:border-r relative">
-      <form className="mx-4 md:mx-8 lg:mx-4 border-b pb-3">
+    <section className="lg:w-[55%] lg:border-r dark:border-neutral-800 relative">
+      <form className="mx-4 md:mx-8 lg:mx-4 border-b dark:border-neutral-800 pb-3">
         <input
-          className="font-bold text-[20px] md:text-2xl text-black dark:text-white my-3 bg-transparent placeholder:text-black outline-none"
+          className="font-bold text-[20px] md:text-2xl text-black dark:text-white my-3 bg-transparent placeholder:text-black dark:placeholder:text-white outline-none"
           placeholder="Enter a title... "
         />
         <div className="flex md:gap-7">
           <div className="w-[30%] md:w-auto">
-            <div className="flex text-[12px] md:text-[14px] text-neutral-700 mb-1 items-center">
+            <div className="flex text-[12px] md:text-[14px] text-neutral-700 dark:text-neutral-300 mb-1 items-center">
               <Image
-                src="/assets/images/icon-tag.svg"
+                src={`/assets/images/icon-tag${darkMode ? "-white" : ""}.svg`}
                 width={16}
                 height={16}
                 alt="tag"
@@ -20,9 +24,9 @@ export default function Note_Form() {
               />
               <label htmlFor="tag">Tags</label>
             </div>
-            <div className="flex md:text-[14px] text-[12px] text-neutral-700 items-center">
+            <div className="flex md:text-[14px] text-[12px] text-neutral-700 dark:text-neutral-300 items-center">
               <Image
-                src="/assets/images/icon-clock.svg"
+                src={`/assets/images/icon-clock${darkMode ? "-white" : ""}.svg`}
                 width={16}
                 height={16}
                 alt="clock"
@@ -31,10 +35,10 @@ export default function Note_Form() {
               <span>Last Edited</span>
             </div>
           </div>
-          <div className="md:text-[14px] text-[12px] text-neutral-700">
+          <div className="md:text-[14px] text-[12px] text-neutral-700 dark:text-neutral-100">
             <input
               type="text"
-              className="mb-1 bg-transparent outline-1 whitespace-pre-line outline-neutral-400 pl-1 w-full"
+              className="mb-1 bg-transparent outline-1 whitespace-pre-line outline-neutral-400 dark:outline-neutral-600 pl-1 w-full"
               name="tag"
               placeholder="Add tags separated by
                commas (e.g. Work, Planning)"
@@ -49,7 +53,7 @@ export default function Note_Form() {
       </form>
 
       <textarea
-        className="text-neutral-800 mt-3 text-[14px] px-4 md:px-8 lg:px-4 w-full outline-none bg-transparent h-[460px] placeholder:text-neutral-800"
+        className="text-neutral-800 mt-3 text-[14px] px-4 md:px-8 lg:px-4 w-full outline-none bg-transparent h-[460px] dark:text-neutral-100 placeholder:text-neutral-800 dark:placeholder:text-neutral-100"
         placeholder="Start typing your note here..."
       />
 
