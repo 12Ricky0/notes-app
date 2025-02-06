@@ -1,14 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import data from "../../data.json";
+// import data from "../../data.json";
 import { useContext } from "react";
 import { NotesContext } from "@/context";
 import { usePathname } from "next/navigation";
+import { Notes } from "@/libs/definitions";
 
-export default function Note_Container() {
+export default function Note_Container({ data }: { data: Notes[] }) {
   const { title, darkMode } = useContext(NotesContext);
-  const note = data.notes.find((note) => note.title == title);
+  const note = data.find((note) => note.title == title);
   const pathname = usePathname();
 
   function date(date: string) {

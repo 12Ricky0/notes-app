@@ -1,17 +1,17 @@
 "use client";
 import Image from "next/image";
-import data from "../../data.json";
 import { useContext } from "react";
 import { NotesContext } from "../../context";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Notes } from "@/libs/definitions";
 
-export default function Sidebar_Nav() {
+export default function Sidebar_Nav({ data }: { data: Notes[] }) {
   // Use a Set to store unique tags
   const uniqueTags = new Set();
 
   // Loop through each note and add its tags to the Set
-  data.notes.forEach((note) => {
+  data.forEach((note) => {
     note.tags.forEach((tag) => {
       uniqueTags.add(tag);
     });

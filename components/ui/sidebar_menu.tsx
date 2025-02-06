@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
-import data from "../../data.json";
 import { useContext } from "react";
 import { NotesContext } from "../../context";
 import Image from "next/image";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { Notes } from "@/libs/definitions";
 
-export default function Sidebar_Menu() {
+export default function Sidebar_Menu({ data }: { data: Notes[] }) {
   function date(date: string) {
     const months = [
       "Jan",
@@ -32,7 +32,7 @@ export default function Sidebar_Menu() {
   const router = useRouter();
   const searchInput = searchParams.get("query")?.toString();
 
-  let notes = data.notes;
+  let notes = data;
 
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
@@ -55,7 +55,7 @@ export default function Sidebar_Menu() {
 
   if (searchInput) {
     notes = notes.filter((note) =>
-      note.tags.some((tag) =>
+      note.tags?.some((tag) =>
         tag.toLowerCase().includes(searchInput.toLowerCase())
       )
     );

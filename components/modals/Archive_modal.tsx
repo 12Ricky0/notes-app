@@ -8,7 +8,7 @@ export default function Archive() {
   const { setDisplayArchive } = useContext(NotesContext);
   return (
     <Overlay>
-      <div className="bg-white dark:bg-neutral-700 w-full mx-4 rounded-lg md:w-[440px]">
+      <div className="bg-white dark:bg-neutral-700 border dark:border-neutral-800 w-full mx-4 rounded-lg md:w-[440px]">
         <article className="p-[20px] border-b flex justify-between items-start gap-4">
           <div className="size-10 bg-neutral-200 dark:bg-neutral-600 rounded-md flex shrink-0 justify-center items-center">
             <Image
