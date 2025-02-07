@@ -8,11 +8,11 @@ import { usePathname } from "next/navigation";
 import { Notes } from "@/libs/definitions";
 
 export default function Note_Container({ data }: { data: Notes[] }) {
-  const { title, darkMode } = useContext(NotesContext);
-  const note = data.find((note) => note.title == title);
+  const { id, darkMode } = useContext(NotesContext);
+  const note = data.find((note) => note._id == id);
   const pathname = usePathname();
 
-  function date(date: string) {
+  function date(date: string | undefined) {
     const months = [
       "Jan",
       "Feb",
@@ -27,7 +27,7 @@ export default function Note_Container({ data }: { data: Notes[] }) {
       "Nov",
       "Dec",
     ];
-    const d = new Date(date);
+    const d = new Date(date!);
     return d.getDate() + " " + months[d.getUTCMonth()] + " " + d.getFullYear();
   }
 
@@ -80,7 +80,7 @@ export default function Note_Container({ data }: { data: Notes[] }) {
           </div>
           <div className="text-[12px] text-neutral-700 dark:text-neutral-300">
             <p className="mb-1">{note?.tags + " "}</p>
-            <p>{date(note!.lastEdited.split("T")[0])}</p>
+            <p>{date(note?.lastEdited.split("T")[0])}</p>
           </div>
         </div>
       </article>

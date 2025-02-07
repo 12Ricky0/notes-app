@@ -26,7 +26,7 @@ export default function Sidebar_Menu({ data }: { data: Notes[] }) {
     return d.getDate() + " " + months[d.getUTCMonth()] + " " + d.getFullYear();
   }
 
-  const { title, setTitle, tag, menu } = useContext(NotesContext);
+  const { id, setID, tag, menu } = useContext(NotesContext);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -133,10 +133,10 @@ export default function Sidebar_Menu({ data }: { data: Notes[] }) {
           </p>
         )}{" "}
         {notes?.map((note, index) => (
-          <div onClick={() => setTitle(note.title)} key={index}>
+          <div onClick={() => setID(note._id)} key={index}>
             <article
               className={`${
-                title == note.title && pathname != "/dashboard/notes/create"
+                id == note._id && pathname != "/dashboard/notes/create"
                   ? "lg:bg-[#F3F5F8] dark:bg-neutral-800 lg:rounded-md lg:px-2 lg:pt-2"
                   : "border-b dark:border-neutral-800"
               } mt-4 lg:flex flex-col gap-3 pb-3 cursor-pointer hidden `}
@@ -161,7 +161,7 @@ export default function Sidebar_Menu({ data }: { data: Notes[] }) {
             <Link className="lg:hidden" href="/dashboard/notes/details">
               <article
                 className={`${
-                  title == note.title
+                  id == note._id
                     ? "lg:bg-[#F3F5F8] dark:bg-neutral-800 rounded-md px-2 pt-2"
                     : "border-b dark:border-neutral-800"
                 } mt-4 flex flex-col gap-3 pb-3 cursor-pointer `}

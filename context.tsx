@@ -11,8 +11,8 @@ import React, {
 
 // Define the type of your context
 type NotesContextType = {
-  title: string;
-  setTitle: Dispatch<SetStateAction<string>>;
+  id: string;
+  setID: Dispatch<SetStateAction<string>>;
   settings: string;
   setSettings: Dispatch<SetStateAction<string>>;
   tag: string;
@@ -33,7 +33,7 @@ export const NotesContext = createContext<NotesContextType>(
 
 // Create the provider component
 export default function NotesProvider({ children }: { children: ReactNode }) {
-  const [title, setTitle] = useState<string>("React Performance Optimization");
+  const [id, setID] = useState<string>("");
   const [tag, setTag] = useState<string>("Dev");
   const [settings, setSettings] = useState<string>("Color Theme");
   const [menu, setMenu] = useState<string>("Home");
@@ -42,6 +42,13 @@ export default function NotesProvider({ children }: { children: ReactNode }) {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
+    fetch("/api")
+      .then((response) => response.json())
+      .then((data) => {
+        setID(data[0]._id);
+        return data;
+      });
+
     const savedFont = localStorage.getItem("fontTheme");
     if (localStorage.getItem("theme") === "dark") {
       setDarkMode(true);
@@ -70,8 +77,8 @@ export default function NotesProvider({ children }: { children: ReactNode }) {
   return (
     <NotesContext.Provider
       value={{
-        title,
-        setTitle,
+        id,
+        setID,
         tag,
         setTag,
         menu,
