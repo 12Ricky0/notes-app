@@ -18,7 +18,7 @@ export function Overlay({ children }: { children: ReactNode }) {
 
 export function Toast({ title, link }: { title: string; link?: string }) {
   return (
-    <div className="border flex w-[390px] rounded-lg p-2 items-center justify-between">
+    <div className="border flex w-[390px] lg:translate-x-[450px] -translate-y-10 z-30 bg-white absolute rounded-lg p-2 items-center justify-between">
       <div className="text-xs font-normal text-neutral-950 dark:text-white flex gap-2 items-center">
         <Image
           src="/assets/images/icon-checkmark.svg"

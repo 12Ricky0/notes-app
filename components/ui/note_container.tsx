@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { NotesContext } from "@/context";
 import { usePathname } from "next/navigation";
 import { Notes } from "@/libs/definitions";
+import { Toast } from "./utilities";
 
 export default function Note_Container({ data }: { data: Notes[] }) {
   const { id, darkMode } = useContext(NotesContext);
@@ -101,7 +102,9 @@ export default function Note_Container({ data }: { data: Notes[] }) {
           </article>
         ))}
       </div>
-      <footer className=" fixed border-t dark:border-neutral-800 mx-6 w-[60%] mb-[20px] hidden lg:block  pt-4">
+      <footer className=" fixed border-t dark:border-neutral-800 mx-6  mb-[20px] hidden lg:block  pt-4">
+        <Toast title="Note Archived" />
+
         <button className="bg-primary-blue px-4 py-2 text-white font-medium text-[14px] rounded-lg mr-4">
           Save Note
         </button>

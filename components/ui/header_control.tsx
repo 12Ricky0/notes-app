@@ -84,7 +84,9 @@ export default function Header_Control() {
           <span className="text-neutral-600 dark:text-neutral-300 text-[14px] ml-1">
             Cancel
           </span>
-          <span className="text-primary-blue text-[14px] ml-1">Save Note</span>
+          <button type="submit" className="text-primary-blue text-[14px] ml-1">
+            Save Note
+          </button>
         </div>
       </div>
       {displayArchive && <Archive />}

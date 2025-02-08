@@ -29,6 +29,37 @@ export async function createNote(prev: any, formData: FormData) {
     await dbConnect();
     await Note.create(validateNoteSchema.data);
   } catch (error) {
+    console.error(error);
+    throw new Error(notFound());
+  }
+  revalidatePath("/dashboard/notes");
+  redirect("/dashboard/notes");
+}
+
+export async function updateArchive(id: string) {
+  try {
+    await dbConnect();
+    const doc = await Note.findById(id);
+    console.log(doc);
+    if (!doc) {
+      throw new Error("Note not found");
+    }
+
+    doc.isArchived = true;
+    await doc.save();
+  } catch (error) {
+    console.error(error);
+    throw new Error(notFound());
+  }
+}
+
+export async function deleteNote(id: string) {
+  try {
+    await dbConnect();
+
+    await Note.findByIdAndDelete(id);
+  } catch (error) {
+    console.error(error);
     throw new Error(notFound());
   }
   revalidatePath("/dashboard/notes");

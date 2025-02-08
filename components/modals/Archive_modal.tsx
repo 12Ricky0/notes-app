@@ -3,9 +3,10 @@ import Image from "next/image";
 import { Overlay } from "../ui/utilities";
 import { useContext } from "react";
 import { NotesContext } from "../../context";
+import { updateArchive } from "@/libs/actions";
 
 export default function Archive() {
-  const { setDisplayArchive } = useContext(NotesContext);
+  const { setDisplayArchive, id } = useContext(NotesContext);
   return (
     <Overlay>
       <div className="bg-white dark:bg-neutral-700 border dark:border-neutral-800 w-full mx-4 rounded-lg md:w-[440px]">
@@ -37,7 +38,13 @@ export default function Archive() {
           >
             Cancel
           </button>
-          <button className="bg-primary-blue px-4 py-3 text-white font-medium text-[14px] rounded-lg">
+          <button
+            onClick={() => {
+              updateArchive(id);
+              setDisplayArchive(false);
+            }}
+            className="bg-primary-blue px-4 py-3 text-white font-medium text-[14px] rounded-lg"
+          >
             Archive Note
           </button>
         </div>

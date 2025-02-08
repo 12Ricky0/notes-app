@@ -18,10 +18,10 @@ export type NoteUser = {
 };
 
 export const noteSchema = z.object({
-  title: z.string(),
-  tags: z.array(z.string()),
-  content: z.string(),
-  lastEdited: z.string().optional(),
+  title: z.string().min(1, { message: "Title can`t be empty" }),
+  tags: z.array(z.string().min(1, { message: "Enter at least one tag" })),
+  content: z.string().min(1, { message: "Content can`t be empty" }),
+  lastEdited: z.string(),
   isArchived: z.boolean(),
 });
 

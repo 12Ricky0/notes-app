@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useContext, useActionState } from "react";
 import { NotesContext } from "../../context";
 import { createNote } from "@/libs/actions";
+import Header_Control from "../ui/header_control";
 
 export default function Note_Form() {
   const { darkMode } = useContext(NotesContext);
@@ -10,10 +11,22 @@ export default function Note_Form() {
   return (
     <section className="lg:w-[55%] lg:border-r dark:border-neutral-800 relative">
       <form action={formAction}>
+        <div className=" lg:hidden">
+          <Header_Control />
+        </div>
+
         <div className="mx-4 md:mx-8 lg:mx-4 border-b dark:border-neutral-800 pb-3">
           <input
-            className="font-bold text-[20px] md:text-2xl text-black dark:text-white my-3 bg-transparent placeholder:text-black dark:placeholder:text-white outline-none"
-            placeholder="Enter a title... "
+            className={`font-bold text-[20px] md:text-2xl text-black dark:text-white my-3 bg-transparent ${
+              state?.errors.title
+                ? "placeholder:text-red-500"
+                : "placeholder:text-black"
+            }  dark:placeholder:text-white outline-none`}
+            placeholder={
+              state?.errors.title
+                ? `${state.errors.title}`
+                : "Enter a title... "
+            }
             type="text"
             name="title"
           />
@@ -45,10 +58,17 @@ export default function Note_Form() {
             <div className="md:text-[14px] text-[12px] text-neutral-700 dark:text-neutral-100">
               <input
                 type="text"
-                className="mb-1 bg-transparent outline-1 whitespace-pre-line outline-neutral-400 dark:outline-neutral-600 pl-1 w-full"
+                className={`mb-1 bg-transparent outline-1 whitespace-pre-line ${
+                  state?.errors.tags
+                    ? "outline-red-500 placeholder:text-red-500"
+                    : "outline-neutral-400"
+                }  dark:outline-neutral-600 pl-1 w-full`}
                 name="tags"
-                placeholder="Add tags separated by
-               commas (e.g. Work, Planning)"
+                placeholder={
+                  state?.errors.tags
+                    ? `${state.errors.tags}`
+                    : "Add tags separated by commas (e.g. Work, Planning)"
+                }
               />
               <input
                 readOnly
@@ -61,8 +81,16 @@ export default function Note_Form() {
         </div>
 
         <textarea
-          className="text-neutral-800 mt-3 text-[14px] px-4 md:px-8 lg:px-4 w-full outline-none bg-transparent h-[460px] dark:text-neutral-100 placeholder:text-neutral-800 dark:placeholder:text-neutral-100"
-          placeholder="Start typing your note here..."
+          className={`text-neutral-800 mt-3 text-[14px] px-4 md:px-8 lg:px-4 w-full outline-none ${
+            state?.errors.content
+              ? "placeholder:text-red-500"
+              : "placeholder:text-neutral-800"
+          } bg-transparent h-[460px] dark:text-neutral-100  dark:placeholder:text-neutral-100`}
+          placeholder={
+            state?.errors.content
+              ? `${state.errors.content}`
+              : "Start typing your note here..."
+          }
           name="content"
         />
 

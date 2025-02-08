@@ -3,9 +3,10 @@ import Image from "next/image";
 import { Overlay } from "../ui/utilities";
 import { useContext } from "react";
 import { NotesContext } from "../../context";
+import { deleteNote } from "@/libs/actions";
 
 export default function Delete() {
-  const { setDisplayDelete } = useContext(NotesContext);
+  const { setDisplayDelete, id } = useContext(NotesContext);
 
   return (
     <Overlay>
@@ -38,7 +39,13 @@ export default function Delete() {
           >
             Cancel
           </button>
-          <button className="bg-red-500 px-4 py-3 text-white font-medium text-[14px] rounded-lg">
+          <button
+            onClick={() => {
+              deleteNote(id);
+              setDisplayDelete(false);
+            }}
+            className="bg-red-500 px-4 py-3 text-white font-medium text-[14px] rounded-lg"
+          >
             Delete Note
           </button>
         </div>
