@@ -19,6 +19,8 @@ type NotesContextType = {
   setTag: Dispatch<SetStateAction<string>>;
   menu: string;
   setMenu: Dispatch<SetStateAction<string>>;
+  toast: string;
+  setToast: Dispatch<SetStateAction<string>>;
   displayArchive: boolean;
   setDisplayArchive: Dispatch<SetStateAction<boolean>>;
   displayDelete: boolean;
@@ -37,6 +39,7 @@ export default function NotesProvider({ children }: { children: ReactNode }) {
   const [tag, setTag] = useState<string>("Dev");
   const [settings, setSettings] = useState<string>("Color Theme");
   const [menu, setMenu] = useState<string>("Home");
+  const [toast, setToast] = useState<string>("");
   const [displayArchive, setDisplayArchive] = useState<boolean>(false);
   const [displayDelete, setDisplayDelete] = useState<boolean>(false);
   const [darkMode, setDarkMode] = useState(false);
@@ -91,6 +94,8 @@ export default function NotesProvider({ children }: { children: ReactNode }) {
         setSettings,
         darkMode,
         setDarkMode,
+        toast,
+        setToast,
       }}
     >
       {children}

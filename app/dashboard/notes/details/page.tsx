@@ -8,7 +8,7 @@ export default async function Details() {
 
   return (
     <div className="flex flex-col w-full">
-      <Header_Control />
+      {/* <Header_Control /> */}
       <Note_Container data={res} />
     </div>
   );

@@ -239,7 +239,7 @@ export default function Sidebar_Nav({ data }: { data: Notes[] }) {
       </>
 
       <>
-        <footer className=" bottom-0 border-t py-3 w-full justify-between bg-white dark:bg-neutral-950 dark:border-neutral-800 dark:shadow-lg md:px-8 px-4 fixed flex lg:hidden">
+        <footer className=" bottom-0 border-t py-3 w-full justify-between z-40 bg-white dark:bg-neutral-950 dark:border-neutral-800 dark:shadow-lg md:px-8 px-4 fixed flex lg:hidden">
           <div
             onClick={() => {
               setMenu("Home");

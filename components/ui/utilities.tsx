@@ -17,8 +17,10 @@ export function Overlay({ children }: { children: ReactNode }) {
 }
 
 export function Toast({ title, link }: { title: string; link?: string }) {
+  const { setTag, toast, setToast } = useContext(NotesContext);
+
   return (
-    <div className="border flex w-[390px] lg:translate-x-[450px] -translate-y-10 z-30 bg-white absolute rounded-lg p-2 items-center justify-between">
+    <div className="border flex md:w-[390px] w-[274px] z-30 bg-white rounded-lg p-2 items-center justify-between">
       <div className="text-xs font-normal text-neutral-950 dark:text-white flex gap-2 items-center">
         <Image
           src="/assets/images/icon-checkmark.svg"
@@ -32,10 +34,14 @@ export function Toast({ title, link }: { title: string; link?: string }) {
       </div>
 
       <div className="flex items-center gap-2 underline">
-        <h1 className="text-xs font-normal text-neutral-950 dark:text-white">
+        <button
+          onClick={() => toast == "Archived" && setTag("Archieved")}
+          className="text-xs font-normal text-neutral-950 cursor-pointer dark:text-white"
+        >
           {link}
-        </h1>
+        </button>
         <Image
+          onClick={() => setToast("")}
           src="/assets/images/icon-cross.svg"
           width={16}
           height={16}
