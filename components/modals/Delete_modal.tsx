@@ -6,7 +6,8 @@ import { NotesContext } from "../../context";
 import { deleteNote } from "@/libs/actions";
 
 export default function Delete() {
-  const { setDisplayDelete, id } = useContext(NotesContext);
+  const { setDisplayDelete, id, setDisplayToast, setToast } =
+    useContext(NotesContext);
 
   return (
     <Overlay>
@@ -43,6 +44,8 @@ export default function Delete() {
             onClick={() => {
               deleteNote(id);
               setDisplayDelete(false);
+              setToast("Note permanently deleted.");
+              setDisplayToast(true);
             }}
             className="bg-red-500 px-4 py-3 text-white font-medium text-[14px] rounded-lg"
           >

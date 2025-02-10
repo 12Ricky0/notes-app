@@ -232,7 +232,8 @@ export function Settings_Nav() {
 }
 
 export function Color_Theme() {
-  const { setSettings, setDarkMode, darkMode } = useContext(NotesContext);
+  const { setSettings, setDarkMode, darkMode, setDisplayToast, setToast } =
+    useContext(NotesContext);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "system");
 
   // Apply the theme to <body> when the user selects an option
@@ -420,7 +421,13 @@ export function Color_Theme() {
           </label>{" "}
         </div>
         <div className="flex justify-end">
-          <button className="px-4  py-3 bg-primary-blue text-white rounded-lg font-medium text-smtransition">
+          <button
+            onSubmit={() => {
+              setToast("Settings updated successfully!");
+              setDisplayToast(true);
+            }}
+            className="px-4  py-3 bg-primary-blue text-white rounded-lg font-medium text-smtransition"
+          >
             Apply Changes
           </button>
         </div>
@@ -430,7 +437,8 @@ export function Color_Theme() {
 }
 
 export function Font_Theme() {
-  const { setSettings, darkMode } = useContext(NotesContext);
+  const { setSettings, darkMode, setToast, setDisplayToast } =
+    useContext(NotesContext);
   const router = useRouter();
   const fonts = [
     {
@@ -545,7 +553,13 @@ export function Font_Theme() {
           </div>
         ))}
         <div onClick={applyChanges} className="flex justify-end">
-          <button className="px-4  py-3 bg-primary-blue text-white rounded-lg font-medium text-smtransition">
+          <button
+            onSubmit={() => {
+              setToast("Settings updated successfully!");
+              setDisplayToast(true);
+            }}
+            className="px-4  py-3 bg-primary-blue text-white rounded-lg font-medium text-smtransition"
+          >
             Apply Changes
           </button>
         </div>

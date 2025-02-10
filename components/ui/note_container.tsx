@@ -11,7 +11,8 @@ import { updateNote } from "@/libs/actions";
 import Header_Control from "./header_control";
 
 export default function Note_Container({ data }: { data: Notes[] }) {
-  const { id, darkMode } = useContext(NotesContext);
+  const { id, darkMode, displayToast, toast, setDisplayToast, setToast } =
+    useContext(NotesContext);
   const note = data.find((note) => note._id == id);
   const pathname = usePathname();
 
@@ -61,7 +62,6 @@ export default function Note_Container({ data }: { data: Notes[] }) {
       <div className=" lg:hidden">
         <Header_Control />
       </div>
-
       <article className="mx-4 md:mx-8 lg:mx-6 border-b dark:border-neutral-800 pb-3">
         <input
           type="text"
@@ -138,13 +138,20 @@ export default function Note_Container({ data }: { data: Notes[] }) {
           defaultValue={note?.content}
         />
       </div>
-
-      <div className="lg:absolute lg:right-[100px] right-0 lg:translate-y-6 z-40 mx-4 lg:mx-0 bottom-[70px] lg:bottom-[62px] fixed">
-        <Toast title="Note Archived" link="Archieved Notes" />
-      </div>
-
+      {displayToast && (
+        <div className="lg:absolute lg:right-[100px] right-0 lg:translate-y-6 z-40 mx-4 lg:mx-0 bottom-[70px] lg:bottom-[62px] fixed">
+          <Toast
+            title={toast}
+            link={toast == "Note archived." ? "Archieved Notes" : ""}
+          />
+        </div>
+      )}{" "}
       <footer className=" border-t relative dark:border-neutral-800 mx-6 mb-[2px] hidden lg:block pt-4 mt-[46]">
         <button
+          onSubmit={() => {
+            setToast("Note saved successfully!");
+            setDisplayToast(true);
+          }}
           type="submit"
           className="bg-primary-blue px-4 py-2 text-white font-medium text-[14px] rounded-lg mr-4"
         >

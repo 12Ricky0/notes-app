@@ -17,7 +17,7 @@ export function Overlay({ children }: { children: ReactNode }) {
 }
 
 export function Toast({ title, link }: { title: string; link?: string }) {
-  const { setTag, toast, setToast } = useContext(NotesContext);
+  const { setTag, toast, setToast, setDisplayToast } = useContext(NotesContext);
 
   return (
     <div className="border flex md:w-[390px] w-[274px] z-30 bg-white rounded-lg p-2 items-center justify-between">
@@ -35,13 +35,16 @@ export function Toast({ title, link }: { title: string; link?: string }) {
 
       <div className="flex items-center gap-2 underline">
         <button
-          onClick={() => toast == "Archived" && setTag("Archieved")}
+          onClick={() => toast == "Note archived." && setTag("Archieved")}
           className="text-xs font-normal text-neutral-950 cursor-pointer dark:text-white"
         >
           {link}
         </button>
         <Image
-          onClick={() => setToast("")}
+          onClick={() => {
+            setToast("");
+            setDisplayToast(false);
+          }}
           src="/assets/images/icon-cross.svg"
           width={16}
           height={16}

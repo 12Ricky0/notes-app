@@ -6,7 +6,8 @@ import { NotesContext } from "../../context";
 import { updateArchive } from "@/libs/actions";
 
 export default function Archive() {
-  const { setDisplayArchive, id } = useContext(NotesContext);
+  const { setDisplayArchive, id, setDisplayToast, setToast } =
+    useContext(NotesContext);
   return (
     <Overlay>
       <div className="bg-white dark:bg-neutral-700 border dark:border-neutral-800 w-full mx-4 rounded-lg md:w-[440px]">
@@ -42,6 +43,8 @@ export default function Archive() {
             onClick={() => {
               updateArchive(id);
               setDisplayArchive(false);
+              setToast("Note archived.");
+              setDisplayToast(true);
             }}
             className="bg-primary-blue px-4 py-3 text-white font-medium text-[14px] rounded-lg"
           >
