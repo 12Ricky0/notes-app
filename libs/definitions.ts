@@ -26,7 +26,7 @@ export const noteSchema = z.object({
 });
 
 export const credentials = z.object({
-  email: z.string().email(),
+  email: z.string().email({ message: "Please enter a valid email address" }),
   password: z
     .string()
     .min(6, { message: "Password must contain at least 6 character(s)" }),

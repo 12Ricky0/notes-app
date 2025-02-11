@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any*/
 "use server";
 import { dbConnect } from "./dbConnect";
-import { noteSchema } from "./definitions";
+import { noteSchema, credentials } from "./definitions";
 import Note from "@/models/note";
 import { notFound } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import User from "@/models/user";
+import bcryptjs from "bcryptjs";
 
 export async function createNote(prev: any, formData: FormData) {
   const title = formData.get("title");
@@ -100,4 +102,53 @@ export async function deleteNote(id: string) {
   }
   revalidatePath("/dashboard/notes");
   redirect("/dashboard/notes");
+}
+
+export async function registerUser(prevState: any, formData: FormData) {
+  const email = formData.get("email");
+  const password = formData.get("password");
+
+  const validateCredentials = credentials.safeParse({
+    email: email,
+    password: password,
+  });
+
+  const user = await getUser(email!.toString());
+  if (user) {
+    return { message: "Email already in use" };
+  }
+
+  if (!validateCredentials.success) {
+    return {
+      errors: validateCredentials.error.flatten().fieldErrors,
+    };
+  }
+  try {
+    const salt = bcryptjs.genSaltSync(10);
+
+    const { email, password } = validateCredentials.data;
+    const hashedPassword = await bcryptjs.hash(password, salt);
+    const data = { email: email, password: hashedPassword };
+    await dbConnect();
+
+    await User.create(data);
+
+    // const userData = {
+    //   user: email,
+    //   name: "Welcome",
+    //   columns: [],
+    // };
+    // await Kanban.create(userData);
+  } catch (error) {
+    console.error(error);
+    throw new Error(notFound());
+  }
+
+  redirect("/");
+}
+
+export async function getUser(email: string) {
+  await dbConnect();
+
+  return await User.findOne({ email: email });
 }

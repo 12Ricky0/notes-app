@@ -1,13 +1,26 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useContext } from "react";
+import { useState, useContext, useActionState, ChangeEvent } from "react";
 import Link from "next/link";
 import { NotesContext } from "../../context";
+import { registerUser } from "@/libs/actions";
 
 export default function Signup_form() {
   const [showPassword, setShowPassword] = useState(false);
   const { darkMode } = useContext(NotesContext);
+  const [state, formAction] = useActionState(registerUser, null);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
   return (
     <section className="mx-4 border rounded-lg text-center dark:border-neutral-800 bg-white dark:bg-primary-dark md:w-[540px] w-full">
       <article className="my-[40px] r">
@@ -27,7 +40,7 @@ export default function Signup_form() {
       </article>
 
       <form
-        action=""
+        action={formAction}
         className="text-primary-dark dark:text-white mx-4 md:mx-12 text-[14px] pb-[40px]"
       >
         <fieldset>
@@ -38,10 +51,57 @@ export default function Signup_form() {
             Email Address
           </label>
           <input
-            className="border cursor-pointer rounded-lg dark:bg-transparent dark:border-neutral-600 dark:hover:bg-neutral-800 hover:bg-neutral-300 py-3 w-full px-3 mb-4 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4 "
-            type="email"
+            className={`border cursor-pointer rounded-lg py-3 w-full px-3 dark:bg-transparent dark:border-neutral-600 dark:hover:bg-neutral-800 hover:bg-neutral-300 ${
+              state?.errors?.email
+                ? "outline-red-500 border-red-500"
+                : "outline-neutral-300 focus:outline-neutral-500 focus:border-primary-dark"
+            }   focus:outline-2  transition outline-offset-4`}
+            type="text"
+            name="email"
             placeholder="email@example.com"
+            onChange={handleChange}
+            value={formData.email}
           />
+          {state?.errors?.email && (
+            <div
+              className={`flex mb-4 mt-[6px] items-center gap-2 text-[12px] ${
+                state?.errors.email
+                  ? "text-red-500"
+                  : "text-tetiary-semi-dark dark:text-secondary-light-gray"
+              } `}
+            >
+              <Image
+                src={`/assets/images/icon-info${
+                  darkMode ? "-white" : state.errors.email ? "-red" : ""
+                }.svg`}
+                width={14}
+                height={14}
+                alt="info"
+                className="w-aut h-aut "
+              />
+              <p>{state.errors.email}</p>
+            </div>
+          )}
+          {state?.message && (
+            <div
+              className={`flex mb-4 mt-[6px] items-center gap-2 text-[12px] ${
+                state?.message
+                  ? "text-red-500"
+                  : "text-tetiary-semi-dark dark:text-secondary-light-gray"
+              } `}
+            >
+              <Image
+                src={`/assets/images/icon-info${
+                  darkMode ? "-white" : state.message ? "-red" : ""
+                }.svg`}
+                width={14}
+                height={14}
+                alt="info"
+                className="w-aut h-aut "
+              />
+              <p>{state.message}</p>
+            </div>
+          )}
         </fieldset>
         <fieldset className="flex justify-between">
           <label className=" mb-[6px] font-medium" htmlFor="password">
@@ -50,8 +110,15 @@ export default function Signup_form() {
         </fieldset>
         <div className="relative">
           <input
-            className="border cursor-pointer rounded-lg py-3 w-full px-3 dark:bg-transparent dark:border-neutral-600 dark:hover:bg-neutral-800 hover:bg-neutral-300 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4"
+            className={`border cursor-pointer rounded-lg py-3 w-full px-3 dark:bg-transparent dark:border-neutral-600 dark:hover:bg-neutral-800 hover:bg-neutral-300 ${
+              state?.errors?.password
+                ? "outline-red-500 border-red-500"
+                : "outline-neutral-300 focus:outline-neutral-500 focus:border-primary-dark"
+            }   focus:outline-2  transition outline-offset-4`}
             type={showPassword ? "text" : "password"}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
           />
           <Image
             src={`/assets/images/icon-${
@@ -64,9 +131,17 @@ export default function Signup_form() {
             onClick={() => setShowPassword(!showPassword)}
           />
 
-          <div className="flex mb-4 mt-[6px] items-center gap-2 text-[12px] text-tetiary-semi-dark dark:text-secondary-light-gray">
+          <div
+            className={`flex mb-4 mt-[6px] items-center gap-2 text-[12px] ${
+              state?.errors?.password
+                ? "text-red-500"
+                : "text-tetiary-semi-dark dark:text-secondary-light-gray"
+            } `}
+          >
             <Image
-              src={`/assets/images/icon-info${darkMode ? "-white" : ""}.svg`}
+              src={`/assets/images/icon-info${
+                darkMode ? "-white" : state?.errors?.password ? "-red" : ""
+              }.svg`}
               width={14}
               height={14}
               alt="info"
