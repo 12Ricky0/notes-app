@@ -1,14 +1,28 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useContext } from "react";
+import { useState, useContext, useActionState, ChangeEvent } from "react";
 import Link from "next/link";
 import { NotesContext } from "../../context";
 import { signIn } from "next-auth/react";
+import { authenticate } from "@/libs/actions";
 
 export default function Login_form() {
   const [showPassword, setShowPassword] = useState(false);
   const { darkMode } = useContext(NotesContext);
+  const [state, formAction] = useActionState(authenticate, undefined);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <section className="mx-4 border rounded-lg text-center dark:border-neutral-800 bg-white dark:bg-primary-dark md:w-[540px] w-full">
       <article className="my-[40px] r">
@@ -28,7 +42,7 @@ export default function Login_form() {
       </article>
 
       <form
-        action=""
+        action={formAction}
         className="text-primary-dark dark:text-white mx-4 md:mx-12 text-[14px] pb-[40px]"
       >
         <fieldset>
@@ -39,12 +53,39 @@ export default function Login_form() {
             Email Address
           </label>
           <input
-            className="border cursor-pointer dark:bg-transparent dark:border-neutral-600 rounded-lg hover:bg-neutral-300 py-3 w-full px-3 mb-4 outline-neutral-300 focus:outline-neutral-500 dark:hover:bg-neutral-800 focus:outline-2 focus:border-primary-dark transition outline-offset-4 "
+            className={`border cursor-pointer rounded-lg py-3 w-full px-3 dark:bg-transparent dark:border-neutral-600 dark:hover:bg-neutral-800 hover:bg-neutral-300 ${
+              state
+                ? "outline-red-500 border-red-500"
+                : "outline-neutral-300 focus:outline-neutral-500 focus:border-primary-dark"
+            }   focus:outline-2  transition outline-offset-4`}
             type="email"
             placeholder="email@example.com"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
           />
+          {state && (
+            <div
+              className={`flex mb-4 mt-[6px] items-center gap-2 text-[12px] ${
+                state
+                  ? "text-red-500"
+                  : "text-tetiary-semi-dark dark:text-secondary-light-gray"
+              } `}
+            >
+              <Image
+                src={`/assets/images/icon-info${
+                  darkMode ? "-white" : state ? "-red" : ""
+                }.svg`}
+                width={14}
+                height={14}
+                alt="info"
+                className="w-aut h-aut "
+              />
+              <p>{state}</p>
+            </div>
+          )}
         </fieldset>
-        <fieldset className="flex justify-between">
+        <fieldset className="flex justify-between mt-4">
           <label className=" mb-[6px] font-medium" htmlFor="password">
             Password
           </label>
@@ -59,6 +100,9 @@ export default function Login_form() {
           <input
             className="border cursor-pointer rounded-lg py-3 w-full dark:bg-transparent dark:hover:bg-neutral-800 dark:border-neutral-600 px-3 mb-4 hover:bg-neutral-300 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4"
             type={showPassword ? "text" : "password"}
+            value={formData.password}
+            onChange={handleChange}
+            name="password"
           />
           <Image
             src={`/assets/images/icon-${

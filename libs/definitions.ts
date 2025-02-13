@@ -31,3 +31,18 @@ export const credentials = z.object({
     .string()
     .min(6, { message: "Password must contain at least 6 character(s)" }),
 });
+
+export const passwordForm = z
+  .object({
+    current_password: z
+      .string()
+      .min(6, { message: "Password must contain at least 6 character(s)" }),
+    new_password: z
+      .string()
+      .min(6, { message: "Password must contain at least 6 character(s)" }),
+    confirm_password: z.string(),
+  })
+  .refine((data) => data.new_password === data.confirm_password, {
+    message: "Passwords don't match",
+    path: ["confirm_password"], // path of error
+  });

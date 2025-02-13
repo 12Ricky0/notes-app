@@ -67,7 +67,7 @@ export default function Note_Container({ data }: { data: Notes[] }) {
           type="text"
           name="title"
           defaultValue={note?.title}
-          className="font-bold text-[24px] text-black focus:outline-none w-full dark:text-white my-3"
+          className="font-bold text-[24px] text-black focus:outline-none w-full dark:text-white my-3 dark:bg-transparent"
         />
         {/* <h1 className="font-bold text-[24px] text-black dark:text-white my-3">
           {note?.title}
@@ -95,11 +95,11 @@ export default function Note_Container({ data }: { data: Notes[] }) {
               <span>Last Edited</span>
             </div>
           </div>
-          <div className="text-[12px] text-neutral-700 dark:text-neutral-300">
+          <div className="text-[12px] text-neutral-700 dark:text-neutral-300 ">
             <input
               type="text"
               name="tags"
-              className="mb-1 focus:outline-none"
+              className="mb-1 focus:outline-none dark:bg-transparent"
               defaultValue={note?.tags + " "}
             />
             {/* <p className="mb-1">{note?.tags + " "}</p> */}

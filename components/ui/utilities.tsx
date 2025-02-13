@@ -20,7 +20,7 @@ export function Toast({ title, link }: { title: string; link?: string }) {
   const { setTag, toast, setToast, setDisplayToast } = useContext(NotesContext);
 
   return (
-    <div className="border flex md:w-[390px] w-[274px] z-30 bg-white rounded-lg p-2 items-center justify-between">
+    <div className="border flex md:w-[390px] w-[274px] z-30 bg-white dark:border-neutral-700 dark:bg-neutral-800 rounded-lg p-2 items-center justify-between">
       <div className="text-xs font-normal text-neutral-950 dark:text-white flex gap-2 items-center">
         <Image
           src="/assets/images/icon-checkmark.svg"

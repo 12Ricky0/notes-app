@@ -5,6 +5,7 @@ import { useState, useContext, useActionState, ChangeEvent } from "react";
 import Link from "next/link";
 import { NotesContext } from "../../context";
 import { registerUser } from "@/libs/actions";
+import { signIn } from "next-auth/react";
 
 export default function Signup_form() {
   const [showPassword, setShowPassword] = useState(false);
@@ -103,7 +104,7 @@ export default function Signup_form() {
             </div>
           )}
         </fieldset>
-        <fieldset className="flex justify-between">
+        <fieldset className="flex justify-between  mt-4">
           <label className=" mb-[6px] font-medium" htmlFor="password">
             Password
           </label>
@@ -163,7 +164,10 @@ export default function Signup_form() {
         <p className="text-[14px] mt-6 font-normal mb-6 text-tetiary-semi-dark dark:text-secondary-light-gray">
           Or log in with:
         </p>
-        <div className="border cursor-pointer dark:border-neutral-800 dark:hover:bg-neutral-800 hover:bg-neutral-300 rounded-lg inline-flex w-full gap-4 py-3 items-center justify-center">
+        <button
+          onClick={() => signIn("google")}
+          className="border cursor-pointer dark:border-neutral-800 dark:hover:bg-neutral-800 hover:bg-neutral-300 rounded-lg inline-flex w-full gap-4 py-3 items-center justify-center"
+        >
           <Image
             src={`/assets/images/icon-google${darkMode ? "-white" : ""}.svg`}
             width={24}
@@ -174,7 +178,7 @@ export default function Signup_form() {
           <h1 className="font-medium text-primary-dark dark:text-white leading-[0.5px]">
             Google
           </h1>
-        </div>
+        </button>
       </div>
 
       <div className="pt-4 pb-10 ">
