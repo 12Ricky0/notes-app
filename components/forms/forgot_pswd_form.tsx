@@ -1,11 +1,43 @@
 "use client";
 
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useState, ChangeEvent } from "react";
 import { NotesContext } from "../../context";
+import HTML_TEMPLATE from "@/mail-template";
+import CryptoJS from "crypto-js";
+import AES from "crypto-js/aes";
 
 export default function Forgot_form() {
   const { darkMode } = useContext(NotesContext);
+  const [formData, setFormData] = useState("");
+  const [error, setError] = useState("");
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData(e.target.value);
+  };
+
+  function sendMail(email: string) {
+    // const encryptedText = AES.encrypt(
+    //   email,
+    //   process.env.CRYPTO_KEY!
+    // ).toString();
+    fetch("/api/send-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        to: email,
+        subject: "Reset Password Link",
+        text: `Hi there, Please click on the link below to reset your password\n http://localhost:3000/reset/${email}`,
+        // html: HTML_TEMPLATE("Hi there, you were emailed me through nodemailer"),
+      }),
+    })
+      .then((response) => response.json())
+      .then((d) => {
+        setError(d.success);
+      });
+  }
+
   return (
     <section className="mx-4 border rounded-lg text-center bg-white dark:border-neutral-800 dark:bg-primary-dark  md:w-[540px]">
       <article className="my-[40px] ">
@@ -39,14 +71,23 @@ export default function Forgot_form() {
             className="border cursor-pointer rounded-lg dark:bg-transparent dark:hover:bg-neutral-800 hover:bg-neutral-300 py-3 w-full px-3 mb-4 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4 "
             type="email"
             placeholder="email@example.com"
+            name="email"
+            value={formData}
+            onChange={handleChange}
           />
         </fieldset>
 
         <button
           type="submit"
-          className=" w-full py-3 text-white font-bold rounded-lg bg-primary-blue"
+          disabled={!!error || formData.length === 0}
+          onClick={(e) => {
+            e.preventDefault();
+            sendMail(formData);
+            setFormData("");
+          }}
+          className={`disabled:bg-blue-400 w-full py-3 text-white font-bold rounded-lg bg-primary-blue`}
         >
-          Send Reset Link
+          {error ? "Reset Link Sent" : "Send Reset Link"}
         </button>
       </form>
     </section>

@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any*/
 "use server";
 import { dbConnect } from "./dbConnect";
-import { noteSchema, credentials, passwordForm } from "./definitions";
+import {
+  noteSchema,
+  credentials,
+  passwordForm,
+  resetPasswordForm,
+} from "./definitions";
 import Note from "@/models/note";
 import { notFound } from "next/navigation";
 import { revalidatePath } from "next/cache";
@@ -212,4 +217,41 @@ export async function changePassword(prev: any, formData: FormData) {
     console.error(error);
   }
   return { success: "Password Changed Successfully!" };
+}
+
+export async function resetPassword(
+  email: string,
+  prev: any,
+  formData: FormData
+) {
+  const new_password = formData.get("new_password");
+  const confirmed_password = formData.get("confirm_password");
+  const user = await getUser(email!);
+
+  if (!user) {
+    return { message: "Email does not exist!" };
+  }
+
+  const parsedCredentials = resetPasswordForm.safeParse({
+    new_password: new_password,
+    confirm_password: confirmed_password,
+  });
+
+  if (!parsedCredentials.success) {
+    return {
+      errors: parsedCredentials.error.flatten().fieldErrors,
+    };
+  }
+
+  try {
+    const salt = bcryptjs.genSaltSync(10);
+
+    const { new_password } = parsedCredentials.data;
+    const hashedPassword = await bcryptjs.hash(new_password, salt);
+    user.password = hashedPassword;
+    await user.save();
+  } catch (error) {
+    console.error(error);
+  }
+  redirect("/");
 }

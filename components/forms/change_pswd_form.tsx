@@ -71,7 +71,7 @@ export default function ChangePassword_form() {
         <fieldset className="flex justify-between">
           <label
             className=" mb-[6px] font-medium dark:text-white text-[14px]"
-            htmlFor="password"
+            htmlFor="old_password"
           >
             Old Password
           </label>
