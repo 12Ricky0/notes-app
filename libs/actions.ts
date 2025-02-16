@@ -21,8 +21,11 @@ export async function createNote(prev: any, formData: FormData) {
   const title = formData.get("title");
   const tags = formData.get("tags");
   const content = formData.get("content");
+  const session = await auth();
+  const id = session?.user?.email;
 
   const validateNoteSchema = noteSchema.safeParse({
+    user: id,
     title: title,
     tags: tags?.toString().split(","),
     content: content,
@@ -53,23 +56,26 @@ export async function updateArchive(id: string) {
       throw new Error("Note not found");
     }
 
-    doc.isArchived = true;
+    doc.isArchived = !doc.isArchived;
     await doc.save();
   } catch (error) {
     console.error(error);
     throw new Error(notFound());
   }
+  revalidatePath("/dashboard/notes");
 }
 
 export async function updateNote(id: string, prev: any, formData: FormData) {
   await dbConnect();
   const doc = await Note.findById(id);
-
+  const session = await auth();
+  const user = session?.user?.email;
   const title = formData.get("title");
   const tags = formData.get("tags");
   const content = formData.get("content");
 
   const validateNoteSchema = noteSchema.safeParse({
+    user: user,
     title: title,
     tags: tags?.toString().split(","),
     content: content,
@@ -86,6 +92,7 @@ export async function updateNote(id: string, prev: any, formData: FormData) {
   try {
     const { title, tags, content, lastEdited, isArchived } =
       validateNoteSchema.data;
+    doc.user = user;
     doc.title = title;
     doc.tags = tags;
     doc.content = content;
@@ -140,13 +147,6 @@ export async function registerUser(prevState: any, formData: FormData) {
     await dbConnect();
 
     await User.create(data);
-
-    // const userData = {
-    //   user: email,
-    //   name: "Welcome",
-    //   columns: [],
-    // };
-    // await Kanban.create(userData);
   } catch (error) {
     console.error(error);
     throw new Error(notFound());

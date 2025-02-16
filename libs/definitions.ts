@@ -4,6 +4,7 @@ export type TagItem = string;
 
 export type Notes = {
   _id: string;
+  user: string;
   title: string;
   tags: [string];
   content: string;
@@ -18,6 +19,7 @@ export type NoteUser = {
 };
 
 export const noteSchema = z.object({
+  user: z.string(),
   title: z.string().min(1, { message: "Title can`t be empty" }),
   tags: z.array(z.string().min(1, { message: "Enter at least one tag" })),
   content: z.string().min(1, { message: "Content can`t be empty" }),

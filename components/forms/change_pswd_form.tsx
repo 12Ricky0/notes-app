@@ -41,7 +41,7 @@ export default function ChangePassword_form() {
         confirm_password: "",
       });
     }
-  }, [state]);
+  }, [state, setDisplayToast, setToast]);
 
   return (
     <form

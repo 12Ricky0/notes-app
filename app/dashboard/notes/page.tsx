@@ -11,7 +11,7 @@ export default async function Note() {
     <>
       <Sidebar_Menu data={res} />
       <Note_Container data={res} />
-      <Right_Menu />
+      <Right_Menu data={res} />
     </>
   );
 }

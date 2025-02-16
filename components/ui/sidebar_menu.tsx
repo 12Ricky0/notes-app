@@ -65,7 +65,7 @@ export default function Sidebar_Menu({ data }: { data: Notes[] }) {
     <section className="lg:w-[290px] md:w-full lg:border-r dark:lg:border-neutral-800 dark:bg-black h-screen overflow-scroll ">
       <div className="lg:pl-8 lg:mr-4 mx-4 md:mx-8 lg:mx-0 md:pt-[20px] lg:last:pb-0 pb-[90px]">
         <Link
-          className="bg-primary-blue hidden lg:flex text-white py-3 rounded-lg font-medium text-[14px] justify-center"
+          className="bg-primary-blue hover:bg-blue-500 hidden lg:flex text-white py-3 rounded-lg font-medium text-[14px] justify-center"
           href="/dashboard/notes/create"
         >
           + Create New Note
@@ -139,7 +139,7 @@ export default function Sidebar_Menu({ data }: { data: Notes[] }) {
                 id == note._id && pathname != "/dashboard/notes/create"
                   ? "lg:bg-[#F3F5F8] dark:bg-neutral-800 lg:rounded-md lg:px-2 lg:pt-2"
                   : "border-b dark:border-neutral-800"
-              } mt-4 lg:flex flex-col gap-3 pb-3 cursor-pointer hidden `}
+              } mt-4 lg:flex flex-col gap-3 pb-3 cursor-pointer hidden hover:lg:bg-[#F3F5F8] dark:hover:bg-neutral-800 hover:lg:rounded-md`}
             >
               <h1 className="font-semibold text-[16px] dark:text-white text-primary-dark">
                 {note.title}
@@ -186,6 +186,12 @@ export default function Sidebar_Menu({ data }: { data: Notes[] }) {
             </Link>
           </div>
         ))}
+        {notes.length == 0 && (
+          <p className="bg-neutral-100 rounded-lg border-neutral-200 text-[14px] p-2 mt-4">
+            You don’t have any notes yet. Start a new note to capture your
+            thoughts and ideas.
+          </p>
+        )}
       </div>
       <Link
         href="/dashboard/notes/create"

@@ -51,7 +51,7 @@ export default function NotesProvider({ children }: { children: ReactNode }) {
     fetch("/api")
       .then((response) => response.json())
       .then((data) => {
-        setID(data[0]._id);
+        setID(data[0]?._id);
         return data;
       });
 

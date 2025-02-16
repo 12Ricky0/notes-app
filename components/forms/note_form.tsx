@@ -1,13 +1,25 @@
 "use client";
 import Image from "next/image";
-import { useContext, useActionState } from "react";
+import { useContext, useActionState, useEffect } from "react";
 import { NotesContext } from "../../context";
 import { createNote } from "@/libs/actions";
 import Header_Control from "../ui/header_control";
 
 export default function Note_Form() {
-  const { darkMode } = useContext(NotesContext);
+  const { darkMode, setToast, setDisplayToast } = useContext(NotesContext);
   const [state, formAction] = useActionState(createNote, null);
+
+  useEffect(() => {
+    if (!state?.errors) {
+      setToast("Note saved successfully!");
+      setDisplayToast(true);
+      // setFormData({
+      //   old_password: "",
+      //   new_password: "",
+      //   confirm_password: "",
+      // });
+    }
+  }, [state, setDisplayToast, setToast]);
   return (
     <section className="lg:w-[55%] lg:border-r dark:border-neutral-800 relative">
       <form action={formAction}>

@@ -1,8 +1,12 @@
 import mongoose from "mongoose";
+import { Notes } from "@/libs/definitions";
 
 const noteSchema = new mongoose.Schema(
   {
-    user: String,
+    user: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -27,6 +31,6 @@ const noteSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Note = mongoose.models.Note || mongoose.model("Note", noteSchema);
+const Note = mongoose.models.Note || mongoose.model<Notes>("Note", noteSchema);
 
 export default Note;

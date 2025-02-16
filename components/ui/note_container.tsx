@@ -15,10 +15,8 @@ export default function Note_Container({ data }: { data: Notes[] }) {
     useContext(NotesContext);
   const note = data.find((note) => note._id == id);
   const pathname = usePathname();
-
   const payload = updateNote.bind(null, id);
   const [state, formAction] = useActionState(payload, null);
-
   function date(date: string | undefined) {
     const months = [
       "Jan",
@@ -38,26 +36,16 @@ export default function Note_Container({ data }: { data: Notes[] }) {
     return d.getDate() + " " + months[d.getUTCMonth()] + " " + d.getFullYear();
   }
 
-  // function formatContent() {
-  //   const sections = note?.content.trim().split(/\n\n+/);
-
-  //   const parsedContent = sections?.map((section) => {
-  //     const [title, ...details] = section.split(/\n/);
-  //     return {
-  //       title: title.trim(),
-  //       details: details.map((detail) => detail.trim()).filter(Boolean),
-  //     };
-  //   });
-
-  //   return parsedContent;
-  // }
-
   return (
     <form
       action={formAction}
       className={`lg:w-[60%] lg:h-screen overflow-scroll  ${
-        pathname == "/dashboard/notes/details" ? "block" : "hidden lg:block"
-      }`}
+        pathname == "/dashboard/notes/details"
+          ? "block"
+          : !note
+          ? "hidden"
+          : "hidden lg:block"
+      } `}
     >
       <div className=" lg:hidden">
         <Header_Control />
@@ -69,9 +57,6 @@ export default function Note_Container({ data }: { data: Notes[] }) {
           defaultValue={note?.title}
           className="font-bold text-[24px] text-black focus:outline-none w-full dark:text-white my-3 dark:bg-transparent"
         />
-        {/* <h1 className="font-bold text-[24px] text-black dark:text-white my-3">
-          {note?.title}
-        </h1> */}
         <div className="flex gap-7 ">
           <div>
             <div className="flex text-[12px] text-neutral-700 dark:text-neutral-300 mb-1 items-center">
@@ -84,6 +69,20 @@ export default function Note_Container({ data }: { data: Notes[] }) {
               />
               <span>Tags</span>
             </div>
+            {note?.isArchived && (
+              <div className="flex text-[12px] text-neutral-700 dark:text-neutral-300 mb-1 items-center">
+                <Image
+                  src={`/assets/images/icon-status${
+                    darkMode ? "-white" : ""
+                  }.svg`}
+                  width={16}
+                  height={16}
+                  alt="tag"
+                  className="mr-[6px]"
+                />
+                <span>Status</span>
+              </div>
+            )}{" "}
             <div className="flex text-[12px] text-neutral-700 dark:text-neutral-300 items-center">
               <Image
                 src={`/assets/images/icon-clock${darkMode ? "-white" : ""}.svg`}
@@ -102,27 +101,12 @@ export default function Note_Container({ data }: { data: Notes[] }) {
               className="mb-1 focus:outline-none dark:bg-transparent"
               defaultValue={note?.tags + " "}
             />
-            {/* <p className="mb-1">{note?.tags + " "}</p> */}
+            {note?.isArchived && <p className="mb-1">Archived</p>}
             <p>{date(note?.lastEdited.split("T")[0])}</p>
           </div>
         </div>
       </article>
       <div className="h-[500px]">
-        {/* {formatContent()?.map((content) => (
-          <article
-            key={content.title}
-            className="text-neutral-800 dark:text-neutral-100 mt-3 text-[14px] mx-4 md:mx-8 lg:mx-6"
-          >
-            <ol className=" my-4">
-              <li>
-                {content.title}
-                <ul className="">
-                  <li>{content.details.map((co) => co)}</li>
-                </ul>
-              </li>
-            </ol>
-          </article>
-        ))} */}
         <textarea
           className={`text-neutral-800 mt-3 text-[14px] px-4 md:px-8 lg:px-4 w-full outline-none ${
             state?.errors.content

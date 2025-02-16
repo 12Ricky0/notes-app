@@ -40,7 +40,7 @@ export default function Sidebar_Nav({ data }: { data: Notes[] }) {
               href="/dashboard/notes"
               className={`flex text-[14px] cursor-pointer ${
                 tag.length == 0 && "bg-neutral-200 dark:bg-neutral-800"
-              }  rounded-lg p-3 justify-between items-center`}
+              }  rounded-lg p-3 justify-between items-center hover:bg-neutral-200 hover:rounded-lg dark:hover:bg-neutral-800`}
             >
               <div className="inline-flex items-center ">
                 <svg
@@ -107,7 +107,7 @@ export default function Sidebar_Nav({ data }: { data: Notes[] }) {
           <div onClick={() => setTag("Archieved")}>
             <Link
               href="/dashboard/notes"
-              className={`flex justify-between cursor-pointer p-3 items-center ${
+              className={`flex justify-between cursor-pointer hover:bg-neutral-200 hover:rounded-lg dark:hover:bg-neutral-800 p-3 items-center ${
                 tag == "Archieved" &&
                 "bg-neutral-200 dark:bg-neutral-800 rounded-lg "
               }`}
@@ -175,7 +175,7 @@ export default function Sidebar_Nav({ data }: { data: Notes[] }) {
                   className={`justify-between cursor-pointer flex p-3 ${
                     tag == tagName &&
                     "bg-neutral-200 dark:bg-neutral-800 rounded-lg "
-                  }`}
+                  } hover:bg-neutral-200 hover:rounded-lg dark:hover:bg-neutral-800`}
                 >
                   <div className={`flex items-center  justify-start  `}>
                     <svg
