@@ -13,7 +13,7 @@ export default function Sidebar_Nav({ data }: { data: Notes[] }) {
   // Loop through each note and add its tags to the Set
   data.forEach((note) => {
     note.tags.forEach((tag) => {
-      uniqueTags.add(tag);
+      uniqueTags.add(tag.trim());
     });
   });
 

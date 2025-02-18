@@ -48,13 +48,14 @@ export default function Note_Container({ data }: { data: Notes[] }) {
       } `}
     >
       <div className=" lg:hidden">
-        <Header_Control />
+        <Header_Control archived={note?.isArchived} />
       </div>
       <article className="mx-4 md:mx-8 lg:mx-6 border-b dark:border-neutral-800 pb-3">
         <input
           type="text"
           name="title"
           defaultValue={note?.title}
+          // onChange={handleChange}
           className="font-bold text-[24px] text-black focus:outline-none w-full dark:text-white my-3 dark:bg-transparent"
         />
         <div className="flex gap-7 ">
@@ -100,6 +101,7 @@ export default function Note_Container({ data }: { data: Notes[] }) {
               name="tags"
               className="mb-1 focus:outline-none dark:bg-transparent"
               defaultValue={note?.tags + " "}
+              // onChange={handleChange}
             />
             {note?.isArchived && <p className="mb-1">Archived</p>}
             <p>{date(note?.lastEdited.split("T")[0])}</p>
@@ -120,6 +122,7 @@ export default function Note_Container({ data }: { data: Notes[] }) {
           }
           name="content"
           defaultValue={note?.content}
+          // onChange={handleChange}
         />
       </div>
       {displayToast && (
@@ -132,18 +135,21 @@ export default function Note_Container({ data }: { data: Notes[] }) {
       )}{" "}
       <footer className=" border-t relative dark:border-neutral-800 mx-6 mb-[2px] hidden lg:block pt-4 mt-[46]">
         <button
-          onSubmit={() => {
+          onClick={() => {
             setToast("Note saved successfully!");
             setDisplayToast(true);
           }}
           type="submit"
-          className="bg-primary-blue px-4 py-2 text-white font-medium text-[14px] rounded-lg mr-4"
+          className="bg-primary-blue hover:bg-blue-500 px-4 py-2 text-white font-medium text-[14px] rounded-lg mr-4"
         >
           Save Note
         </button>
-        <button className="bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 px-4 py-2 text-neutral-700 font-medium text-[14px] rounded-lg">
+        <span
+          // onClick={() => router.refresh()}
+          className="bg-neutral-200 cursor-pointer dark:bg-neutral-800 dark:text-neutral-400 px-4 py-2 text-neutral-700 font-medium text-[14px] rounded-lg"
+        >
           Cancel
-        </button>
+        </span>
       </footer>
     </form>
   );

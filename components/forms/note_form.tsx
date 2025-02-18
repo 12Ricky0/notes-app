@@ -4,20 +4,17 @@ import { useContext, useActionState, useEffect } from "react";
 import { NotesContext } from "../../context";
 import { createNote } from "@/libs/actions";
 import Header_Control from "../ui/header_control";
+import { useRouter } from "next/navigation";
 
 export default function Note_Form() {
   const { darkMode, setToast, setDisplayToast } = useContext(NotesContext);
   const [state, formAction] = useActionState(createNote, null);
+  const router = useRouter();
 
   useEffect(() => {
     if (!state?.errors) {
       setToast("Note saved successfully!");
       setDisplayToast(true);
-      // setFormData({
-      //   old_password: "",
-      //   new_password: "",
-      //   confirm_password: "",
-      // });
     }
   }, [state, setDisplayToast, setToast]);
   return (
@@ -110,9 +107,12 @@ export default function Note_Form() {
           <button className="bg-primary-blue px-4 py-2 text-white font-medium text-[14px] rounded-lg mr-4">
             Save Note
           </button>
-          <button className="bg-neutral-200 px-4 py-2 text-neutral-700 font-medium text-[14px] rounded-lg">
+          <span
+            onClick={() => router.back()}
+            className="bg-neutral-200 px-4 cursor-pointer py-2 text-neutral-700 font-medium text-[14px] rounded-lg"
+          >
             Cancel
-          </button>
+          </span>
         </footer>
       </form>
     </section>
