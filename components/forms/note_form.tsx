@@ -73,6 +73,7 @@ export default function Note_Form() {
                     : "outline-neutral-400"
                 }  dark:outline-neutral-600 pl-1 w-full`}
                 name="tags"
+                id="tags"
                 placeholder={
                   state?.errors.tags
                     ? `${state.errors.tags}`

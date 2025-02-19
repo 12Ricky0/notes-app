@@ -23,7 +23,7 @@ export default function Header() {
   }
 
   return (
-    <header className=" lg:bg-none py-[13px] dark:bg-black dark:border-neutral-800 lg:border-b static">
+    <header className=" lg:bg-none py-[13px] dark:bg-black dark:border-neutral-800 lg:border-b static bg-neutral-100 lg:bg-transparent">
       <Image
         src={`/assets/images/logo${darkMode ? "-dark" : ""}.svg`}
         width={24}

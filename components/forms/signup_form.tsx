@@ -59,6 +59,7 @@ export default function Signup_form() {
             }   focus:outline-2  transition outline-offset-4`}
             type="text"
             name="email"
+            id="email"
             placeholder="email@example.com"
             onChange={handleChange}
             value={formData.email}
@@ -118,6 +119,7 @@ export default function Signup_form() {
             }   focus:outline-2  transition outline-offset-4`}
             type={showPassword ? "text" : "password"}
             name="password"
+            id="password"
             value={formData.password}
             onChange={handleChange}
           />

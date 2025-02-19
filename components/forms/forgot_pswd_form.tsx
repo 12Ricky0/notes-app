@@ -1,11 +1,8 @@
 "use client";
-
 import Image from "next/image";
 import { useContext, useState, ChangeEvent } from "react";
 import { NotesContext } from "../../context";
-import HTML_TEMPLATE from "@/mail-template";
-import CryptoJS from "crypto-js";
-import AES from "crypto-js/aes";
+import { encrypt } from "@/encryption";
 
 export default function Forgot_form() {
   const { darkMode } = useContext(NotesContext);
@@ -16,10 +13,7 @@ export default function Forgot_form() {
   };
 
   function sendMail(email: string) {
-    // const encryptedText = AES.encrypt(
-    //   email,
-    //   process.env.CRYPTO_KEY!
-    // ).toString();
+    const encrypted = encrypt(email);
     fetch("/api/send-email", {
       method: "POST",
       headers: {
@@ -28,8 +22,7 @@ export default function Forgot_form() {
       body: JSON.stringify({
         to: email,
         subject: "Reset Password Link",
-        text: `Hi there, Please click on the link below to reset your password\n http://localhost:3000/reset/${email}`,
-        // html: HTML_TEMPLATE("Hi there, you were emailed me through nodemailer"),
+        text: `Hi there, Please click on the link below to reset your password\n http://localhost:3000/reset/${encrypted.encryptedData}/${encrypted.iv}/${encrypted.key}`,
       }),
     })
       .then((response) => response.json())
@@ -60,23 +53,28 @@ export default function Forgot_form() {
         action=""
         className="text-primary-dark dark:text-white mx-4 md:mx-12 text-[14px] pb-[40px]"
       >
-        <fieldset>
-          <label
-            className="block text-left mb-[6px] font-medium"
-            htmlFor="email"
-          >
-            Email Address
-          </label>
-          <input
-            className="border cursor-pointer rounded-lg dark:bg-transparent dark:hover:bg-neutral-800 hover:bg-neutral-300 py-3 w-full px-3 mb-4 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4 "
-            type="email"
-            placeholder="email@example.com"
-            name="email"
-            value={formData}
-            onChange={handleChange}
-          />
-        </fieldset>
-
+        {error ? (
+          <h1 className="mt-4 mb-2 text-[24px] text-primary-dark dark:text-white font-bold">
+            Check your inbox or spam and follow the instructions.
+          </h1>
+        ) : (
+          <fieldset>
+            <label
+              className="block text-left mb-[6px] font-medium"
+              htmlFor="email"
+            >
+              Email Address
+            </label>
+            <input
+              className="border cursor-pointer rounded-lg dark:bg-transparent dark:hover:bg-neutral-800 hover:bg-neutral-300 py-3 w-full px-3 mb-4 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4 "
+              type="email"
+              placeholder="email@example.com"
+              name="email"
+              value={formData}
+              onChange={handleChange}
+            />
+          </fieldset>
+        )}
         <button
           type="submit"
           disabled={!!error || formData.length === 0}

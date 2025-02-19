@@ -85,6 +85,7 @@ export default function ChangePassword_form() {
             }   focus:outline-2  transition outline-offset-4`}
             type={showPassword ? "text" : "password"}
             name="old_password"
+            id="old_password"
             value={formData.old_password}
             onChange={handleChange}
           />
@@ -142,6 +143,7 @@ export default function ChangePassword_form() {
             }   focus:outline-2  transition outline-offset-4`}
             type={showPassword ? "text" : "password"}
             name="new_password"
+            id="new_password"
             value={formData.new_password}
             onChange={handleChange}
           />
@@ -192,6 +194,7 @@ export default function ChangePassword_form() {
             }   focus:outline-2  transition outline-offset-4`}
             type={showPassword ? "text" : "password"}
             name="confirm_password"
+            id="confirm_password"
             value={formData.confirm_password}
             onChange={handleChange}
           />
@@ -239,7 +242,6 @@ export default function ChangePassword_form() {
               <p>{state.message}</p>
             </div>
           )}
-          {/* {state?.success && <p>{state.success}</p>} */}
 
           <Image
             src={`/assets/images/icon-${
@@ -255,14 +257,6 @@ export default function ChangePassword_form() {
       </div>
       <div className="flex justify-end mt-4">
         <button
-          // onClick={() => {
-          //   setTimeout(() => {
-          //     if (state?.success) {
-          //       setToast("Password Changed Successfully!");
-          //       setDisplayToast(true);
-          //     }
-          //   }, 3000); // Waits 5 seconds before executing
-          // }}
           type="submit"
           className="px-4  py-3 bg-primary-blue text-white rounded-lg font-medium text-smtransition"
         >

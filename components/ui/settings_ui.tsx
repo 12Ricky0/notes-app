@@ -211,7 +211,7 @@ export function Settings_Nav() {
         </div>
       </div>
 
-      <div className="flex gap-2 pt-4 px-2 font-medium text-sm text-neutral-950 dark:text-white cursor-pointer">
+      <div className="flex gap-2 pt-4 px-2 font-medium text-sm hover:text-blue-700 text-neutral-950 dark:text-white cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -220,7 +220,7 @@ export function Settings_Nav() {
           viewBox="0 0 24 24"
         >
           <path
-            stroke={`${darkMode ? "#E0E4EA" : "#0E121B"} `}
+            stroke={` ${darkMode ? "#E0E4EA" : "#0E121B "} `}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="1.8"

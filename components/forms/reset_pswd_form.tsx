@@ -59,6 +59,7 @@ export default function Reset_form({ email }: { email: string }) {
             }   focus:outline-2  transition outline-offset-4`}
             type={showPassword ? "text" : "password"}
             name="new_password"
+            id="new_password"
             value={formData.new_password}
             onChange={handleChange}
           />
@@ -107,6 +108,7 @@ export default function Reset_form({ email }: { email: string }) {
             }   focus:outline-2  transition outline-offset-4`}
             type={showPassword ? "text" : "password"}
             name="confirm_password"
+            id="confirm_password"
             value={formData.confirm_password}
             onChange={handleChange}
           />

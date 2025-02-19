@@ -61,6 +61,7 @@ export default function Login_form() {
             type="email"
             placeholder="email@example.com"
             name="email"
+            id="email"
             value={formData.email}
             onChange={handleChange}
           />
@@ -101,6 +102,7 @@ export default function Login_form() {
             className="border cursor-pointer rounded-lg py-3 w-full dark:bg-transparent dark:hover:bg-neutral-800 dark:border-neutral-600 px-3 mb-4 hover:bg-neutral-300 outline-neutral-300 focus:outline-neutral-500 focus:outline-2 focus:border-primary-dark transition outline-offset-4"
             type={showPassword ? "text" : "password"}
             value={formData.password}
+            id="password"
             onChange={handleChange}
             name="password"
           />
