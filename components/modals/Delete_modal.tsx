@@ -36,7 +36,7 @@ export default function Delete() {
         <div className="flex gap-4 justify-end mx-[20px] py-4">
           <button
             onClick={() => setDisplayDelete(false)}
-            className="bg-neutral-200 px-4 py-3 text-neutral-700 font-medium text-[14px] rounded-lg"
+            className="bg-neutral-200 px-4 py-3 hover:bg-slate-100 dark:hover:bg-neutral-700 text-neutral-700 font-medium text-[14px] rounded-lg"
           >
             Cancel
           </button>
@@ -47,7 +47,7 @@ export default function Delete() {
               setToast("Note permanently deleted.");
               setDisplayToast(true);
             }}
-            className="bg-red-500 px-4 py-3 text-white font-medium text-[14px] rounded-lg"
+            className="bg-red-500 hover:bg-red-400 px-4 py-3 text-white font-medium text-[14px] rounded-lg"
           >
             Delete Note
           </button>

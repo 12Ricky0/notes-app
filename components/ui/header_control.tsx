@@ -106,7 +106,10 @@ export default function Header_Control({ archived }: { archived?: boolean }) {
               />
             </svg>
           )}
-          <span className="text-neutral-600 dark:text-neutral-300 text-[14px] ml-1">
+          <span
+            onClick={() => router.back()}
+            className="text-neutral-600 dark:text-neutral-300 text-[14px] ml-1"
+          >
             Cancel
           </span>
           <button type="submit" className="text-primary-blue text-[14px] ml-1">

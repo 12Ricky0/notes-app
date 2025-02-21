@@ -35,7 +35,7 @@ export default function Archive() {
         <div className="flex gap-4 justify-end mx-[20px] py-4">
           <button
             onClick={() => setDisplayArchive(false)}
-            className="bg-neutral-200 px-4 py-3 text-neutral-700 font-medium text-[14px] rounded-lg"
+            className="bg-neutral-200 px-4 py-3 hover:bg-slate-100 dark:hover:bg-neutral-700 text-neutral-700 font-medium text-[14px] rounded-lg"
           >
             Cancel
           </button>
@@ -46,7 +46,7 @@ export default function Archive() {
               setToast("Note archived.");
               setDisplayToast(true);
             }}
-            className="bg-primary-blue px-4 py-3 text-white font-medium text-[14px] rounded-lg"
+            className="bg-primary-blue px-4 hover:bg-blue-500 py-3 text-white font-medium text-[14px] rounded-lg"
           >
             Archive Note
           </button>

@@ -72,7 +72,7 @@ export function Right_Menu({ data }: { data: Notes[] }) {
   return (
     <section>
       <div className="w-[290p] pt-[20px] pl-4 border-l dark:border-neutral-800 h-screen hidden lg:block mr-8 cursor-pointer">
-        <div className="py-3 px-2 rounded-lg border dark:border-neutral-600 w-[242px] mb-3">
+        <div className="py-3 px-2 rounded-lg border dark:border-neutral-600 hover:bg-slate-100 hover:dark:bg-neutral-700 w-[242px] mb-3">
           <div
             onClick={() => {
               if (note?.isArchived) {
@@ -138,7 +138,7 @@ export function Right_Menu({ data }: { data: Notes[] }) {
         </div>
         <div
           onClick={() => setDisplayDelete(true)}
-          className="py-3 px-2 rounded-lg border dark:border-neutral-600 w-[242px] mb-3"
+          className="py-3 px-2 rounded-lg border dark:border-neutral-600 hover:bg-slate-100 hover:dark:bg-neutral-700 w-[242px] mb-3"
         >
           <div className="flex items-center gap-2">
             <svg

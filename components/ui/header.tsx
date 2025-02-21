@@ -29,7 +29,8 @@ export default function Header() {
         width={24}
         height={24}
         alt="logo"
-        className="w-auto h-auto mx-4 md:mx-8 pt-[23p] lg:hidden"
+        onClick={() => window.location.reload()}
+        className="w-auto h-auto cursor-pointer mx-4 md:mx-8 pt-[23p] lg:hidden"
       />
       <div className="lg:flex justify-between items-center mx-8 hidden ">
         {pathname == "/dashboard/settings" ? (

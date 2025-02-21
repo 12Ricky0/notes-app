@@ -7,17 +7,14 @@ import { useRouter } from "next/navigation";
 import { Notes } from "@/libs/definitions";
 
 export default function Sidebar_Nav({ data }: { data: Notes[] }) {
-  // Use a Set to store unique tags
   const uniqueTags = new Set();
 
-  // Loop through each note and add its tags to the Set
   data.forEach((note) => {
     note.tags.forEach((tag) => {
       uniqueTags.add(tag.trim());
     });
   });
 
-  // Convert the Set back to an array
   const tagsArray = Array.from(uniqueTags).sort();
 
   const { tag, setTag, setMenu, menu, darkMode } = useContext(NotesContext);
@@ -30,7 +27,8 @@ export default function Sidebar_Nav({ data }: { data: Notes[] }) {
         width={24}
         height={24}
         alt="logo"
-        className="w-auto h-auto mx-4 pt-6 pb-3 hidden lg:block"
+        onClick={() => window.location.reload()}
+        className="w-auto h-auto mx-4 cursor-pointer pt-6 pb-3 hidden lg:block"
       />
 
       <>

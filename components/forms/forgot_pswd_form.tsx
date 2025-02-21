@@ -83,7 +83,7 @@ export default function Forgot_form() {
             sendMail(formData);
             setFormData("");
           }}
-          className={`disabled:bg-blue-400 w-full py-3 text-white font-bold rounded-lg bg-primary-blue`}
+          className={`disabled:bg-blue-400 w-full py-3 text-white font-bold rounded-lg bg-primary-blue hover:bg-blue-500`}
         >
           {error ? "Reset Link Sent" : "Send Reset Link"}
         </button>

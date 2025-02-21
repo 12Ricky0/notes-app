@@ -156,7 +156,7 @@ export default function Signup_form() {
 
         <button
           type="submit"
-          className=" w-full py-3 text-white font-bold rounded-lg bg-primary-blue"
+          className=" w-full py-3 text-white font-bold rounded-lg bg-primary-blue hover:bg-blue-500"
         >
           Sign up
         </button>

@@ -258,7 +258,7 @@ export default function ChangePassword_form() {
       <div className="flex justify-end mt-4">
         <button
           type="submit"
-          className="px-4  py-3 bg-primary-blue text-white rounded-lg font-medium text-smtransition"
+          className="px-4  py-3 bg-primary-blue hover:bg-blue-500 text-white rounded-lg font-medium text-smtransition"
         >
           Save Password
         </button>

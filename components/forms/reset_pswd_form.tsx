@@ -171,7 +171,7 @@ export default function Reset_form({ email }: { email: string }) {
 
         <button
           type="submit"
-          className=" w-full py-3 mt-4 text-white font-bold rounded-lg bg-primary-blue"
+          className=" w-full py-3 mt-4 text-white font-bold rounded-lg hover:bg-blue-500 bg-primary-blue"
         >
           Reset Password
         </button>

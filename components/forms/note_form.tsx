@@ -105,12 +105,12 @@ export default function Note_Form() {
         />
 
         <footer className="absolute bottom-0 px-4 mb-[20px] lg:w-full hidden lg:block border-t pt-4 ">
-          <button className="bg-primary-blue px-4 py-2 text-white font-medium text-[14px] rounded-lg mr-4">
+          <button className="bg-primary-blue hover:bg-blue-500 px-4 py-2 text-white font-medium text-[14px] rounded-lg mr-4">
             Save Note
           </button>
           <span
             onClick={() => router.back()}
-            className="bg-neutral-200 px-4 cursor-pointer py-2 text-neutral-700 font-medium text-[14px] rounded-lg"
+            className="bg-neutral-200 px-4 cursor-pointer hover:bg-slate-100 dark:hover:bg-neutral-700 py-2 text-neutral-700 font-medium text-[14px] rounded-lg"
           >
             Cancel
           </span>
