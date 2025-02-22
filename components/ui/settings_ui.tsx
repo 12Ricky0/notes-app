@@ -22,7 +22,7 @@ export function Settings_Nav() {
       <div className="flex flex-col  border-b dark:border-neutral-800 pb-4 lg:mt-[20px] lg:w-[258px] cursor-pointer">
         <div
           onClick={() => setSettings("Color Theme")}
-          className={`flex justify-between items-center py-[10px] ${
+          className={`flex justify-between hover:bg-neutral-100 dark:hover:bg-neutral-800 items-center py-[10px] ${
             settings == "Color Theme" && "bg-neutral-100 dark:bg-neutral-800"
           }   rounded-md`}
         >
@@ -83,7 +83,7 @@ export function Settings_Nav() {
           onClick={() => setSettings("Font Theme")}
           className={`flex py-[10px] px-2 ${
             settings == "Font Theme" && "bg-neutral-100 dark:bg-neutral-800"
-          }  rounded-md justify-between`}
+          }  rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 justify-between`}
         >
           <div className="flex gap-2 font-medium text-sm text-neutral-950 dark:text-white">
             <svg
@@ -138,15 +138,9 @@ export function Settings_Nav() {
           className={`flex py-[10px] px-2 ${
             settings == "Change Password" &&
             "bg-neutral-100 dark:bg-neutral-800"
-          }  rounded-md justify-between`}
+          }  rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 justify-between`}
         >
           <div className="flex gap-2 font-medium text-sm text-neutral-950 dark:text-white">
-            {/* <Image
-              src="/assets/images/icon-lock.svg"
-              width={20}
-              height={20}
-              alt="lock"
-            /> */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -236,33 +230,37 @@ export function Settings_Nav() {
 export function Color_Theme() {
   const { setSettings, setDarkMode, darkMode, setDisplayToast, setToast } =
     useContext(NotesContext);
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "system");
+  const [theme, setTheme] = useState("system");
 
-  // Apply the theme to <body> when the user selects an option
-  const applyTheme = (mode: string) => {
-    localStorage.setItem("theme", mode);
-    setTheme(mode);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        setTheme(savedTheme);
+      }
+    }
+  }, []);
 
-    if (mode === "dark") {
-      // document.body.classList.add("dark-mode");
+  function applyChanges() {
+    localStorage.setItem("theme", theme);
+
+    if (theme === "dark") {
       setDarkMode(true);
-    } else if (mode === "light") {
-      // document.body.classList.remove("dark-mode");
+    } else if (theme === "light") {
       setDarkMode(false);
     } else {
-      // System theme - detect user's preference
       const prefersDark = window.matchMedia(
         "(prefers-color-scheme: dark)"
       ).matches;
       if (prefersDark) {
-        // document.body.classList.add("dark-mode");
         setDarkMode(true);
       } else {
-        // document.body.classList.remove("dark-mode");
         setDarkMode(false);
       }
     }
-  };
+    setToast("Settings updated successfully!");
+    setDisplayToast(true);
+  }
 
   return (
     <>
@@ -292,14 +290,12 @@ export function Color_Theme() {
           </p>
         </div>
 
-        <div
-          className={`flex ${
-            theme == "light" ? "bg-neutral-100 dark:bg-neutral-800" : "bg-white"
-          } border py-[17px] rounded-xl dark:border-neutral-700 dark:bg-transparent justify-between items-center mb-4`}
+        <label
+          className={`flex border py-[17px] rounded-xl hover:bg-gray-100 cursor-pointer dark:hover:bg-neutral-800 dark:border-neutral-700 dark:bg-transparent justify-between items-center mb-4`}
         >
           <div className="flex">
             <div
-              className={`size-[40px]  rounded-xl bg-white dark:bg-transparent dark:border-neutral-800 flex justify-center items-center border mx-4`}
+              className={`size-[40px]  rounded-xl bg-white dark:bg-transparent dark:border-neutral-700 flex justify-center items-center border mx-4`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -335,22 +331,20 @@ export function Color_Theme() {
               </p>
             </div>
           </div>
-          <label className="inline-flex items-center mr-4">
+          <div className="inline-flex items-center mr-4">
             <input
               checked={theme === "light"}
-              onChange={() => applyTheme("light")}
+              onChange={() => setTheme("light")}
               type="radio"
               name="custom-option"
               className="hidden peer"
             />
             <div className="size-4 rounded-full border-2 border-gray-300 peer-checked:border-primary-blue peer-checked:bg-white peer-checked:border-[4px]" />
-          </label>{" "}
-        </div>
+          </div>{" "}
+        </label>
 
-        <div
-          className={`flex ${
-            theme == "dark" ? "bg-neutral-800" : "bg-white"
-          } border dark:border-neutral-800 py-[17px] rounded-xl justify-between items-center mb-4`}
+        <label
+          className={`flex border hover:bg-gray-100 dark:hover:bg-neutral-800 dark:border-neutral-800 py-[17px] cursor-pointer rounded-xl justify-between items-center mb-4`}
         >
           <div className="flex">
             <div className="size-[40px] rounded-xl bg-white dark:bg-transparent dark:border-neutral-700 flex justify-center items-center border mx-4">
@@ -371,27 +365,23 @@ export function Color_Theme() {
               </p>
             </div>
           </div>
-          <label className="inline-flex items-center mr-4">
+          <div className="inline-flex items-center mr-4 ">
             <input
               checked={theme === "dark"}
-              onChange={() => applyTheme("dark")}
+              onChange={() => setTheme("dark")}
               type="radio"
               name="custom-option"
               className="hidden peer"
             />
             <div className="size-4 rounded-full border-2 border-gray-300 peer-checked:border-primary-blue peer-checked:bg-white peer-checked:border-[4px]" />
-          </label>{" "}
-        </div>
+          </div>{" "}
+        </label>
 
-        <div
-          className={`flex ${
-            theme == "system"
-              ? "bg-neutral-100 dark:bg-neutral-800"
-              : "bg-white"
-          } border dark:border-neutral-700 py-[17px] rounded-xl dark:bg-transparent justify-between items-center mb-4`}
+        <label
+          className={`flex hover:bg-gray-100 cursor-pointer dark:hover:bg-neutral-800 border dark:border-neutral-700 py-[17px] rounded-xl dark:bg-transparent justify-between items-center mb-4`}
         >
           <div className="flex">
-            <div className="size-[40px] rounded-xl bg-white dark:bg-transparent dark:border-neutral-800 flex justify-center items-center border mx-4">
+            <div className="size-[40px] rounded-xl bg-white dark:bg-transparent dark:border-neutral-700 flex justify-center items-center border mx-4">
               <Image
                 src={`/assets/images/icon-system-theme${
                   darkMode ? "-white" : ""
@@ -411,24 +401,21 @@ export function Color_Theme() {
               </p>
             </div>
           </div>
-          <label className="inline-flex items-center mr-4">
+          <div className="inline-flex items-center mr-4 ">
             <input
               checked={theme === "system"}
-              onChange={() => applyTheme("system")}
+              onChange={() => setTheme("system")}
               type="radio"
               name="custom-option"
               className="hidden peer"
             />
             <div className="size-4 rounded-full border-2 border-gray-300 peer-checked:border-primary-blue peer-checked:bg-white peer-checked:border-[4px]" />
-          </label>{" "}
-        </div>
+          </div>{" "}
+        </label>
         <div className="flex justify-end">
           <button
-            onSubmit={() => {
-              setToast("Settings updated successfully!");
-              setDisplayToast(true);
-            }}
-            className="px-4  py-3 bg-primary-blue text-white rounded-lg font-medium text-smtransition"
+            onClick={applyChanges}
+            className="px-4  py-3 bg-primary-blue hover:bg-blue-500 text-white rounded-lg font-medium text-smtransition"
           >
             Apply Changes
           </button>
@@ -471,7 +458,6 @@ export function Font_Theme() {
   };
 
   const applyChanges = () => {
-    // Save to local storage
     localStorage.setItem("fontTheme", selectedFont);
     const savedFont = localStorage.getItem("fontTheme");
     if (savedFont) {
@@ -508,13 +494,13 @@ export function Font_Theme() {
           </p>
         </div>
         {fonts.map((font, index) => (
-          <div key={index}>
+          <label key={index}>
             <div
               className={`flex ${
                 font.value == selectedFont
                   ? "bg-neutral-100 dark:bg-neutral-800"
                   : "bg-white dark:bg-neutral-950"
-              } border py-[17px] rounded-xl dark:border-neutral-700 justify-between items-center mb-4`}
+              } border py-[17px] rounded-xl hover:bg-gray-100 dark:hover:bg-neutral-800 dark:border-neutral-700 cursor-pointer justify-between items-center mb-4`}
             >
               <div className="flex">
                 <div className="size-[40px] rounded-xl bg-white dark:bg-transparent dark:border-neutral-700 flex justify-center items-center border mx-4">
@@ -541,7 +527,7 @@ export function Font_Theme() {
                   </p>
                 </div>
               </div>
-              <label className="inline-flex items-center mr-4 cursor-pointer">
+              <div className="inline-flex items-center mr-4">
                 <input
                   type="radio"
                   name={font.name}
@@ -550,9 +536,9 @@ export function Font_Theme() {
                   className="hidden peer"
                 />
                 <div className="size-4 rounded-full border-2 border-gray-300 peer-checked:border-primary-blue peer-checked:bg-white peer-checked:border-[4px]" />
-              </label>{" "}
+              </div>{" "}
             </div>
-          </div>
+          </label>
         ))}
         <div onClick={applyChanges} className="flex justify-end">
           <button

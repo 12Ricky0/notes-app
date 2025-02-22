@@ -9,7 +9,6 @@ import React, {
   useEffect,
 } from "react";
 
-// Define the type of your context
 type NotesContextType = {
   id: string;
   setID: Dispatch<SetStateAction<string>>;
@@ -60,7 +59,6 @@ export default function NotesProvider({ children }: { children: ReactNode }) {
       setDarkMode(true);
     }
     if (savedFont) {
-      // applyFontClass(savedFont);
       document.body.classList.add("font-" + savedFont);
     } else {
       document.body.classList.add("font-serif");

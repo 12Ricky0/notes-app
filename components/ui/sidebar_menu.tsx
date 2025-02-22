@@ -62,7 +62,7 @@ export default function Sidebar_Menu({ data }: { data: Notes[] }) {
   }
 
   return (
-    <section className="lg:w-[290px] md:w-full lg:border-r dark:lg:border-neutral-800 dark:bg-black h-screen overflow-scroll ">
+    <section className="lg:w-[290px] md:w-full lg:border-r dark:lg:border-neutral-800 dark:bg-neutral-950 h-screen overflow-scroll ">
       <div className="lg:pl-8 lg:mr-4 mx-4 md:mx-8 lg:mx-0 md:pt-[20px] lg:last:pb-0 pb-[90px]">
         <Link
           className="bg-primary-blue hover:bg-blue-500 hidden lg:flex text-white py-3 rounded-lg font-medium text-[14px] justify-center"
@@ -92,13 +92,6 @@ export default function Sidebar_Menu({ data }: { data: Notes[] }) {
         >
           All Notes
         </h1>
-        {/* <h1
-          className={`font-bold text-black text-[24px] mt-[20px] mb-2 lg:hidden ${
-            menu == "Search" ? "block" : "hidden"
-          }`}
-        >
-          Search
-        </h1> */}
         {menu == "Search" && (
           <div className="relative lg:hidden">
             <input
@@ -187,7 +180,7 @@ export default function Sidebar_Menu({ data }: { data: Notes[] }) {
           </div>
         ))}
         {notes.length == 0 && (
-          <p className="bg-neutral-100 rounded-lg border-neutral-200 text-[14px] p-2 mt-4">
+          <p className="bg-neutral-100 rounded-lg border-neutral-200 dark:bg-neutral-800 dark:text-white text-[14px] p-2 mt-4">
             You don’t have any notes yet. Start a new note to capture your
             thoughts and ideas.
           </p>

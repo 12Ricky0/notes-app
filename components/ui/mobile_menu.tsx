@@ -6,17 +6,14 @@ import { useRouter } from "next/navigation";
 import { Notes } from "@/libs/definitions";
 
 export function Tags({ data }: { data: Notes[] }) {
-  // Use a Set to store unique tags
   const uniqueTags = new Set();
 
-  // Loop through each note and add its tags to the Set
   data.forEach((note) => {
     note.tags.forEach((tag) => {
       uniqueTags.add(tag.trim());
     });
   });
 
-  // Convert the Set back to an array
   const tagsArray = Array.from(uniqueTags).sort();
 
   const { tag, setTag, menu, darkMode } = useContext(NotesContext);
