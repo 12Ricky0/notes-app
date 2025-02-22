@@ -139,6 +139,7 @@ export async function registerUser(prevState: any, formData: FormData) {
     };
   }
   try {
+    await dbConnect();
     const salt = bcryptjs.genSaltSync(10);
 
     const { email, password } = validateCredentials.data;
@@ -185,7 +186,7 @@ export async function changePassword(prev: any, formData: FormData) {
   const old_password = formData.get("old_password");
   const new_password = formData.get("new_password");
   const confirmed_password = formData.get("confirm_password");
-
+  await dbConnect();
   const session = await auth();
   const id = session?.user?.email;
 
@@ -205,7 +206,6 @@ export async function changePassword(prev: any, formData: FormData) {
   }
   try {
     const salt = bcryptjs.genSaltSync(10);
-
     const { current_password, new_password } = parsedCredentials.data;
     const new_hashedPassword = await bcryptjs.hash(new_password, salt);
     if (!(await bcryptjs.compare(current_password, user.password))) {
@@ -227,6 +227,7 @@ export async function resetPassword(
   const new_password = formData.get("new_password");
   const confirmed_password = formData.get("confirm_password");
   const user = await getUser(email!);
+  await dbConnect();
 
   if (!user) {
     return { message: "Email does not exist!" };
