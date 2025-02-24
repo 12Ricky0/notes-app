@@ -22,15 +22,15 @@ export default function Sidebar_Nav({ data }: { data: Notes[] }) {
 
   return (
     <section className="lg:border-r dark:lg:border-neutral-800 lg:h-screen overflow-scroll lg:w-[272px]">
-      <Image
-        src={`/assets/images/logo${darkMode ? "-dark" : ""}.svg`}
-        width={24}
-        height={24}
-        alt="logo"
-        onClick={() => window.location.reload()}
-        className="w-auto h-auto mx-4 cursor-pointer pt-6 pb-3 hidden lg:block"
-      />
-
+      <Link href="/">
+        <Image
+          src={`/assets/images/logo${darkMode ? "-dark" : ""}.svg`}
+          width={24}
+          height={24}
+          alt="logo"
+          className="w-auto h-auto mx-4 cursor-pointer pt-6 pb-3 hidden lg:block"
+        />
+      </Link>
       <>
         <nav className="mx-4 mt-4 hidden dark:text-neutral-200 lg:block">
           <div onClick={() => setTag("")}>

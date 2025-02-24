@@ -34,7 +34,6 @@ export const NotesContext = createContext<NotesContextType>(
   {} as NotesContextType
 );
 
-// Create the provider component
 export default function NotesProvider({ children }: { children: ReactNode }) {
   const [id, setID] = useState<string>("");
   const [tag, setTag] = useState<string>("Dev");

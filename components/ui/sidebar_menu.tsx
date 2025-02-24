@@ -54,10 +54,13 @@ export default function Sidebar_Menu({ data }: { data: Notes[] }) {
   }
 
   if (searchInput) {
-    notes = notes.filter((note) =>
-      note.tags?.some((tag) =>
-        tag.toLowerCase().includes(searchInput.toLowerCase())
-      )
+    notes = notes.filter(
+      (note) =>
+        note.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+        note.content.toLowerCase().includes(searchInput.toLowerCase()) ||
+        note.tags?.some((tag) =>
+          tag.toLowerCase().includes(searchInput.toLowerCase())
+        )
     );
   }
 

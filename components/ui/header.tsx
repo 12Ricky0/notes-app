@@ -22,20 +22,27 @@ export default function Header() {
     router.replace(`${pathname}?${params.toString()}`);
   }
 
+  const searchInput = searchParams.get("query")?.toString();
+
   return (
     <header className=" lg:bg-none py-[13px] dark:bg-neutral-950 dark:border-neutral-800 lg:border-b static bg-neutral-100 lg:bg-transparent">
-      <Image
-        src={`/assets/images/logo${darkMode ? "-dark" : ""}.svg`}
-        width={24}
-        height={24}
-        alt="logo"
-        onClick={() => window.location.reload()}
-        className="w-auto h-auto cursor-pointer mx-4 md:mx-8 pt-[23p] lg:hidden"
-      />
+      <Link href="/">
+        <Image
+          src={`/assets/images/logo${darkMode ? "-dark" : ""}.svg`}
+          width={24}
+          height={24}
+          alt="logo"
+          className="w-auto h-auto cursor-pointer mx-4 md:mx-8 pt-[23p] lg:hidden"
+        />
+      </Link>
       <div className="lg:flex justify-between items-center mx-8 hidden ">
         {pathname == "/dashboard/settings" ? (
           <h1 className={`font-bold text-black dark:text-white text-[24px]`}>
             Settings
+          </h1>
+        ) : searchInput ? (
+          <h1 className={`font-bold text-black dark:text-white text-[24px] `}>
+            Showing results for: {searchInput}
           </h1>
         ) : (
           <>

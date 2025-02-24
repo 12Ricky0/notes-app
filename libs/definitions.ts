@@ -31,17 +31,17 @@ export const credentials = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
   password: z
     .string()
-    .min(6, { message: "Password must contain at least 6 character(s)" }),
+    .min(8, { message: "Password must contain at least 8 character(s)" }),
 });
 
 export const passwordForm = z
   .object({
     current_password: z
       .string()
-      .min(6, { message: "Password must contain at least 6 character(s)" }),
+      .min(8, { message: "Password must contain at least 8 character(s)" }),
     new_password: z
       .string()
-      .min(6, { message: "Password must contain at least 6 character(s)" }),
+      .min(8, { message: "Password must contain at least 8 character(s)" }),
     confirm_password: z.string(),
   })
   .refine((data) => data.new_password === data.confirm_password, {
@@ -53,7 +53,7 @@ export const resetPasswordForm = z
   .object({
     new_password: z
       .string()
-      .min(8, { message: "Password must contain at least 6 character(s)" }),
+      .min(8, { message: "Password must contain at least 8 character(s)" }),
     confirm_password: z.string(),
   })
   .refine((data) => data.new_password === data.confirm_password, {

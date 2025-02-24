@@ -291,7 +291,11 @@ export function Color_Theme() {
         </div>
 
         <label
-          className={`flex border py-[17px] rounded-xl hover:bg-gray-100 cursor-pointer dark:hover:bg-neutral-800 dark:border-neutral-700 dark:bg-transparent justify-between items-center mb-4`}
+          className={`flex border py-[17px] ${
+            theme == "light"
+              ? "bg-neutral-100 dark:bg-neutral-800"
+              : "bg-white dark:bg-neutral-950"
+          } rounded-xl hover:bg-gray-100 cursor-pointer dark:hover:bg-neutral-800 dark:border-neutral-700 dark:bg-transparent justify-between items-center mb-4`}
         >
           <div className="flex">
             <div
@@ -344,7 +348,11 @@ export function Color_Theme() {
         </label>
 
         <label
-          className={`flex border hover:bg-gray-100 dark:hover:bg-neutral-800 dark:border-neutral-800 py-[17px] cursor-pointer rounded-xl justify-between items-center mb-4`}
+          className={`flex border ${
+            theme == "dark"
+              ? "bg-neutral-100 dark:bg-neutral-800"
+              : "bg-white dark:bg-neutral-950"
+          } hover:bg-gray-100 dark:hover:bg-neutral-800 dark:border-neutral-800 py-[17px] cursor-pointer rounded-xl justify-between items-center mb-4`}
         >
           <div className="flex">
             <div className="size-[40px] rounded-xl bg-white dark:bg-transparent dark:border-neutral-700 flex justify-center items-center border mx-4">
@@ -378,7 +386,11 @@ export function Color_Theme() {
         </label>
 
         <label
-          className={`flex hover:bg-gray-100 cursor-pointer dark:hover:bg-neutral-800 border dark:border-neutral-700 py-[17px] rounded-xl dark:bg-transparent justify-between items-center mb-4`}
+          className={`flex hover:bg-gray-100 ${
+            theme == "system"
+              ? "bg-neutral-100 dark:bg-neutral-800"
+              : "bg-white dark:bg-neutral-950"
+          } cursor-pointer dark:hover:bg-neutral-800 border dark:border-neutral-700 py-[17px] rounded-xl dark:bg-transparent justify-between items-center mb-4`}
         >
           <div className="flex">
             <div className="size-[40px] rounded-xl bg-white dark:bg-transparent dark:border-neutral-700 flex justify-center items-center border mx-4">

@@ -22,7 +22,7 @@ export default function Forgot_form() {
       body: JSON.stringify({
         to: email,
         subject: "Reset Password Link",
-        text: `Hi there, Please click on the link below to reset your password\n http://localhost:3000/reset/${encrypted.encryptedData}/${encrypted.iv}/${encrypted.key}`,
+        text: `Hi there, Please click on the link below to reset your password\n https://notes-app-smoky-iota.vercel.app/reset/${encrypted.encryptedData}/${encrypted.iv}/${encrypted.key}`,
       }),
     })
       .then((response) => response.json())
