@@ -165,7 +165,13 @@ export default function Note_Container({ data }: { data: Notes[] }) {
         <div className="lg:absolute lg:right-[100px] right-0 lg:translate-y-6 z-40 mx-4 lg:mx-0 bottom-[70px] lg:bottom-[62px] fixed">
           <Toast
             title={toast}
-            link={toast == "Note archived." ? "Archieved Notes" : ""}
+            link={
+              toast == "Note archived."
+                ? "Archieved Notes"
+                : toast == "Note restored to active notes."
+                ? "All Notes"
+                : ""
+            }
           />
         </div>
       )}{" "}

@@ -37,7 +37,11 @@ export function Toast({ title, link }: { title: string; link?: string }) {
 
       <div className="flex items-center gap-2 underline">
         <button
-          onClick={() => toast == "Note archived." && setTag("Archieved")}
+          onClick={() =>
+            toast == "Note archived."
+              ? setTag("Archieved")
+              : toast == "Note restored to active notes." && setTag("")
+          }
           className="text-xs font-normal text-neutral-950 cursor-pointer dark:text-white"
         >
           {link}
@@ -66,17 +70,21 @@ export function Right_Menu({ data }: { data: Notes[] }) {
     setDisplayDelete,
     id,
     darkMode,
+    setDisplayToast,
+    setToast,
   } = useContext(NotesContext);
 
   const note = data.find((note) => note._id == id);
   return (
-    <section>
+    <section className={`${note ? "block" : "hidden"}`}>
       <div className="w-[290p] pt-[20px] pl-4 border-l dark:border-neutral-800 h-screen hidden lg:block mr-8 cursor-pointer">
         <div className="py-3 px-2 rounded-lg border dark:border-neutral-600 hover:bg-slate-100 hover:dark:bg-neutral-700 w-[242px] mb-3">
           <div
             onClick={() => {
               if (note?.isArchived) {
                 updateArchive(id);
+                setToast("Note restored to active notes.");
+                setDisplayToast(true);
               } else {
                 setDisplayArchive(true);
               }

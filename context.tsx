@@ -36,7 +36,7 @@ export const NotesContext = createContext<NotesContextType>(
 
 export default function NotesProvider({ children }: { children: ReactNode }) {
   const [id, setID] = useState<string>("");
-  const [tag, setTag] = useState<string>("Dev");
+  const [tag, setTag] = useState<string>("");
   const [settings, setSettings] = useState<string>("Color Theme");
   const [menu, setMenu] = useState<string>("Home");
   const [toast, setToast] = useState<string>("");
