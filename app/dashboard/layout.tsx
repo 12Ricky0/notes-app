@@ -1,6 +1,7 @@
 import Sidebar_Nav from "@/components/ui/sidebar_navigation";
 import Header from "@/components/ui/header";
 import { getAllNotes } from "@/libs/data";
+
 export default async function Layout({
   children,
 }: {

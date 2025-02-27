@@ -162,7 +162,7 @@ export default function Note_Container({ data }: { data: Notes[] }) {
         </div>
       </Suspense>
       {displayToast && (
-        <div className="lg:absolute lg:right-[100px] right-0 lg:translate-y-6 z-40 mx-4 lg:mx-0 bottom-[70px] lg:bottom-[62px] fixed">
+        <div className="lg:hidden  right-0 z-40 mx-4 bottom-[70px] fixed">
           <Toast
             title={toast}
             link={
@@ -176,6 +176,20 @@ export default function Note_Container({ data }: { data: Notes[] }) {
         </div>
       )}{" "}
       <footer className=" border-t relative dark:border-neutral-800 mx-6 mb-[2px] hidden lg:block pt-4 mt-[46]">
+        {displayToast && (
+          <div className="absolute right-[0px] lg:translate-y-7 z-40 mx-4 lg:mx-0 bottom-[70px] lg:bottom-[62px]">
+            <Toast
+              title={toast}
+              link={
+                toast == "Note archived."
+                  ? "Archieved Notes"
+                  : toast == "Note restored to active notes."
+                  ? "All Notes"
+                  : ""
+              }
+            />
+          </div>
+        )}
         <button
           onClick={() => {
             setToast("Note saved successfully!");

@@ -15,6 +15,8 @@ export default function Header_Control({ archived }: { archived?: boolean }) {
     setDisplayDelete,
     darkMode,
     id,
+    setDisplayToast,
+    setToast,
   } = useContext(NotesContext);
 
   const router = useRouter();
@@ -62,7 +64,11 @@ export default function Header_Control({ archived }: { archived?: boolean }) {
               height="18"
               fill="none"
               viewBox="0 0 24 24"
-              onClick={() => updateArchive(id)}
+              onClick={() => {
+                updateArchive(id);
+                setToast("Note restored to active notes.");
+                setDisplayToast(true);
+              }}
             >
               <path
                 className="dark:fill-white"
