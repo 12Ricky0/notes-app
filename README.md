@@ -57,6 +57,5 @@ Users are be able to:
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
 - Frontend Mentor - [@12Ricky0](https://www.frontendmentor.io/profile/12Ricky0)
 - Instagram - [@temple4b](https://www.instagram.com/temple4b)
